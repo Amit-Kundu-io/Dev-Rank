@@ -6,7 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RepoResponse(
-    val incomplete_results: Boolean,
- //   val items: List<Item>? = null,
-    val total_count: Int
+
+    @SerialName("incomplete_results") val incompleteResults: Boolean? = null,
+    @SerialName("items") val items: List<Item>? = null,
+    @SerialName("total_count") val totalCount: Int? = null
 )
