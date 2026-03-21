@@ -5,7 +5,7 @@ import com.kundutechstudio.ranks.presentation.rank_screen.Repositories.Repositor
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
-fun ranksModules() = module {
+fun getRanksModules() = module {
 
     viewModelOf(::RankViewModel)
     viewModelOf(::RepositoriesViewModel)
