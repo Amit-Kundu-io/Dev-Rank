@@ -1,5 +1,4 @@
-package com.kundutechstudio.theme
-
+package com.kundutechstudio.theme.Helpers
 
 object Helpers {
 

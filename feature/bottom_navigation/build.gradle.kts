@@ -6,12 +6,13 @@ plugins {
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
 
     androidLibrary {
-        namespace = "com.kundutechstudio.devrank"
+        namespace = "com.kundutechstudio.feature.bottom_navigation"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
 
         compilerOptions {
@@ -44,15 +45,12 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
-
             implementation(libs.bundles.koin.android)
 
         }
         commonMain.dependencies {
-            implementation(projects.network)
+
             implementation(projects.theme)
-            implementation(projects.feature.auth)
-            implementation(projects.feature.bottomNavigation)
             implementation(projects.feature.compare)
             implementation(projects.feature.profile)
             implementation(projects.feature.ranks)
@@ -72,7 +70,7 @@ kotlin {
             implementation(libs.jetbrains.compose.navigation)
 
             implementation(libs.bundles.koin.common)
-
+            implementation(libs.ktor.client.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

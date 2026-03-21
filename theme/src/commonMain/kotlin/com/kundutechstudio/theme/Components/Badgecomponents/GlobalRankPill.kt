@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import com.kundutechstudio.theme.Helpers.formatNumber
-import com.kundutechstudio.theme.Helpers.rankPercentile
+import com.kundutechstudio.theme.Helpers.Helpers.formatNumber
+import com.kundutechstudio.theme.Helpers.Helpers.rankPercentile
 import com.kundutechstudio.theme.ui.AccentBlue
 import com.kundutechstudio.theme.ui.AccentBlueGhost
 import com.kundutechstudio.theme.ui.AccentBlueLight
