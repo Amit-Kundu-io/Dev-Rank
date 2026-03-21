@@ -6,6 +6,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.kundutechstudio.ranks.presentation.models.HomeLeaderboardScreen
+import com.kundutechstudio.ranks.presentation.rank_screen.RankRootScreen
 
 
 fun NavGraphBuilder.rankNavigation(
@@ -14,9 +16,7 @@ fun NavGraphBuilder.rankNavigation(
     navigation<RankRoutes.RankGraph>(startDestination = RankRoutes.RankRoute) {
 
         composable<RankRoutes.RankRoute> {
-            Column {
-                Text("Rank")
-            }
+            RankRootScreen()
         }
 
     }

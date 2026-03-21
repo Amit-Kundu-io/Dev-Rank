@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -120,103 +121,6 @@ fun NotificationButton(
     }
 }
 
-/**
- * BottomNavBar — 4-item bottom navigation
- */
-data class NavItem(
-    val icon: String,
-    val label: String,
-)
-
-@Composable
-fun DevRankBottomNav(
-    items: List<NavItem>,
-    selectedIndex: Int = 0,
-    onSelect: (Int) -> Unit = {},
-    modifier: Modifier = Modifier,
-) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(CardSize.navBarHeight)
-            .background(BgOverlay)
-            .border(
-                width = BorderWidth.default,
-                color = BorderMuted,
-                shape = androidx.compose.foundation.shape.RoundedCornerShape(0.dp),
-            )
-            .padding(top = Spacing.md, bottom = Spacing.xxl),
-    ) {
-        items.forEachIndexed { index, item ->
-            val isSelected = index == selectedIndex
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(3.dp),
-                modifier = Modifier
-                    .weight(1f)
-                    .clickable { onSelect(index) },
-            ) {
-                Text(
-                    text = item.icon,
-                    fontSize = 19.sp,
-                    color = if (isSelected) AccentBlueLight else TextPlaceholder,
-                )
-                Text(
-                    text = item.label,
-                    color = if (isSelected) AccentBlueLight else TextPlaceholder,
-                    fontSize = 9.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    letterSpacing = 0.05.sp,
-                )
-            }
-        }
-    }
-}
-
-/**
- * HomePageHeader — title block at top of Home screen
- */
-@Composable
-fun HomePageHeader(
-    title: String,
-    subtitle: String,
-    modifier: Modifier = Modifier,
-) {
-    Row(
-        verticalAlignment = Alignment.Top,
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = Spacing.xl, vertical = Spacing.sm),
-    ) {
-        Column {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.headlineLarge,
-                color = TextPrimary,
-            )
-            Text(
-                text = subtitle,
-                color = TextSubtle,
-                fontSize = 12.sp,
-                modifier = Modifier.padding(top = 3.dp),
-            )
-        }
-        NotificationButton(hasNotification = true)
-    }
-}
-
-// ─────────────────────────────────────────────────────────────────
-// Previews
-// ─────────────────────────────────────────────────────────────────
-
-val defaultNavItems = listOf(
-    NavItem("🏠", "Home"),
-    NavItem("🔍", "Search"),
-    NavItem("⚡", "Compare"),
-    NavItem("🔖", "Saved"),
-    NavItem("👤", "Profile"),
-)
 
 @Preview(showBackground = true, backgroundColor = 0xFF0D1117)
 @Composable
@@ -228,6 +132,8 @@ private fun PreviewTopBar() {
                 showBack = false,
                 trailingContent = { NotificationButton() },
             )
+
+            Spacer(modifier = Modifier.height(2.dp).fillMaxWidth().background(Color.White))
             DevRankTopBar(
                 title = "Top Developers",
                 showBack = true,
@@ -246,24 +152,5 @@ private fun PreviewTopBar() {
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFF0D1117)
-@Composable
-private fun PreviewBottomNav() {
-    DevRankTheme {
-        DevRankBottomNav(
-            items = defaultNavItems,
-            selectedIndex = 0,
-        )
-    }
-}
 
-@Preview(showBackground = true, backgroundColor = 0xFF0D1117)
-@Composable
-private fun PreviewHomeHeader() {
-    DevRankTheme {
-        HomePageHeader(
-            title = "Global Developer\nRankings",
-            subtitle = "Updated 3 min ago · 47M developers",
-        )
-    }
-}
+
