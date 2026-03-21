@@ -7,11 +7,13 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.NavigationBar
@@ -73,6 +75,9 @@ fun BottomScreen() {
             .background(Color.Black)
             .statusBarsPadding()
             .navigationBarsPadding(),
+
+        contentWindowInsets = WindowInsets(0,0,0,0),
+
         bottomBar = {
             AnimatedVisibility(
                 visible = isShowBottomNav,
@@ -89,7 +94,8 @@ fun BottomScreen() {
             ) {
 
                 NavigationBar(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth()
+                        . windowInsetsPadding(WindowInsets(0,0,0,0)),
                 ) {
 
                     AppBottomNav(
