@@ -52,12 +52,7 @@ fun CustomBottomBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(BgOverlay)                          // #161B22 — card surface
-            .clickable(
-                onClick = {},
-                interactionSource = null,
-                indication = null,
-            )
+            .background(Color.White)//BgOverlay)
     ) {
 
         // ── Top divider — subtle gradient line ───────────────────
