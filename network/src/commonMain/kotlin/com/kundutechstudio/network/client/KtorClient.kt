@@ -39,7 +39,7 @@ object KtorClient {
         install(DefaultRequest) {
             url {
                 protocol = URLProtocol.HTTPS
-                host = "devapihrms.cloudbalance.in"
+                host = ""
             }
             header(HttpHeaders.ContentType, ContentType.Application.Json)
             header(HttpHeaders.Accept, ContentType.Application.Json)
