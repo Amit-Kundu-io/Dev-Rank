@@ -54,7 +54,6 @@ fun CustomBottomBar(
             .fillMaxWidth()
             .background(BgOverlay)
     ) {
-
         // ── Top divider — subtle gradient line ───────────────────
         Canvas(
             modifier = Modifier
@@ -78,7 +77,7 @@ fun CustomBottomBar(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 10.dp)
+                .padding(top = 6.dp)
                 .padding(horizontal = Spacing.sm),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly,
@@ -110,7 +109,7 @@ fun CustomBottomBar(
                 Column(
                     modifier = Modifier
                         .weight(1f)
-                        .padding(vertical = Spacing.sm),
+                        .padding(vertical = Spacing.xs),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
                 ) {
