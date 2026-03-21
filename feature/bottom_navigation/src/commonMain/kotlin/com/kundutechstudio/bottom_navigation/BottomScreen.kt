@@ -92,10 +92,10 @@ fun BottomScreen() {
                     }
                 )
             ) {
-
-                NavigationBar(
-                    modifier = Modifier.fillMaxWidth()
-                        . windowInsetsPadding(WindowInsets(0,0,0,0)),
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.Black)
                 ) {
 
                     AppBottomNav(
