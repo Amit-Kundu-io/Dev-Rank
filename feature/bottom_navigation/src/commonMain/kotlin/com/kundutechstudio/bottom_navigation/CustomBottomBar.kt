@@ -52,7 +52,7 @@ fun CustomBottomBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.White)//BgOverlay)
+            .background(BgOverlay)
     ) {
 
         // ── Top divider — subtle gradient line ───────────────────
