@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -75,11 +74,11 @@ kotlin {
             implementation(libs.bundles.koin.common)
 
         }
-
-        commonTest.dependencies {iosMain.dependencies {
+        iosMain.dependencies {
             implementation(libs.ktor.client.ios)
         }
 
+        commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
     }
