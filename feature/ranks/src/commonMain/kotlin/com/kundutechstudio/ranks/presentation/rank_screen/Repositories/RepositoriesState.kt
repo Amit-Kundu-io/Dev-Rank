@@ -12,10 +12,12 @@ data class RepositoriesState(
     val isTopRepoLoading: Boolean = true,
     val isLargestRepoLoading: Boolean = true,
     val isBeginnerLoading: Boolean = true,
+    val isActiveRepoLoading: Boolean = true,
 
     val topStarredRepoList: List<RepoItemDAO> = emptyList(),
     val topTrendingRepoList: List<RepoItemDAO> = emptyList(),
     val topLargestRepoList: List<RepoItemDAO> = emptyList(),
     val beginnerFriendlyRepoList: List<RepoItemDAO> = emptyList(),
+    val activeRepoList: List<RepoItemDAO> = emptyList(),
 )
 

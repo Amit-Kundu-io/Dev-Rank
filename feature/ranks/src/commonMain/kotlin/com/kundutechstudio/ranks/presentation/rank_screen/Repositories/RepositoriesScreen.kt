@@ -71,7 +71,7 @@ private fun RepositoriesScreen(
             Spacer(Modifier.height(Spacing.lg))
             SectionHeader(
                 title = "⭐ Top Starred",
-                badgeLabel = "REPOS",
+                badgeLabel = "STAR",
                 badgeColor = StarYellow,
                 badgeBg = StarYellowGhost,
                 onViewAll = onViewAllRepos,
@@ -113,6 +113,9 @@ private fun RepositoriesScreen(
         item {
             SectionHeader(
                 title = "🔥 Trending Now",
+                badgeLabel = "CREATE",
+                badgeColor = AccentBlueLight,
+                badgeBg = AccentBlueGhost,
                 onViewAll = onViewAllRepos,
             )
         }
@@ -147,8 +150,8 @@ private fun RepositoriesScreen(
             SectionHeader(
                 title = "💻 Largest Projects",
                 badgeLabel = "SIZE",
-                badgeColor = AccentBlueLight,
-                badgeBg = AccentBlueGhost,
+                badgeColor = StarYellow,
+                badgeBg = StarYellowGhost,
                 onViewAll = onViewAllRepos,
             )
         }
@@ -187,26 +190,36 @@ private fun RepositoriesScreen(
 
 
         //Beginner Friendly project
-
+        //🚀 4. Active Projects
         // Most Starred
         item {
             Spacer(Modifier.height(Spacing.lg))
             SectionHeader(
-                title = "\uD83C\uDF31 Beginner Friendly",
-                badgeLabel = "REPOS",
-                badgeColor = StarYellow,
-                badgeBg = StarYellowGhost,
+                title = "\uD83D\uDE80 4. Active Projects",
+                badgeLabel = "STAR",
+                badgeColor = AccentBlueLight,
+                badgeBg = AccentBlueGhost,
                 onViewAll = onViewAllRepos,
             )
         }
-        if (state.isBeginnerLoading) {
+//        item {
+//            Spacer(Modifier.height(Spacing.lg))
+//            SectionHeader(
+//                title = "\uD83C\uDF31 Beginner Friendly",
+//                badgeLabel = "REPOS",
+//                badgeColor = StarYellow,
+//                badgeBg = StarYellowGhost,
+//                onViewAll = onViewAllRepos,
+//            )
+//        }
+        if (state.isActiveRepoLoading) {
             items(3) {
                 RepoVerticalCardSkeleton()
                 Spacer(Modifier.height(Spacing.sm))
             }
         } else {
             items(
-                items = state.beginnerFriendlyRepoList.take(3),
+                items = state.activeRepoList.take(3),
                 key = { it.id }) { repo ->
                 RepoVerticalCard(
                     onClick = { onRepoClick(repo) },

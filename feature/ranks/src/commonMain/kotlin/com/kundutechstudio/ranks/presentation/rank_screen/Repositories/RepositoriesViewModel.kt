@@ -3,6 +3,7 @@ package com.kundutechstudio.ranks.presentation.rank_screen.Repositories
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kundutechstudio.network.res.NetworkResult
+import com.kundutechstudio.ranks.domain.use_case.get_active_repo_use_case.GetActiveRepoUseCase
 import com.kundutechstudio.ranks.domain.use_case.get_beginner_friendly_use_case.GetBeginnerFriendlyUseCase
 import com.kundutechstudio.ranks.domain.use_case.get_largest_repos_use_case.GetLargestReposUseCase
 import com.kundutechstudio.ranks.domain.use_case.get_top_Treanding_repo_use_case.GetTopTrendingRepoUseCase
@@ -20,6 +21,7 @@ class RepositoriesViewModel(
     private val getTopTrendingRepoUseCase: GetTopTrendingRepoUseCase,
     private val getLargestReposUseCase: GetLargestReposUseCase,
     private val getBeginnerFriendlyUseCase: GetBeginnerFriendlyUseCase,
+    private val getActiveRepoUseCase: GetActiveRepoUseCase,
 ) : ViewModel() {
 
     private var hasLoadedInitialData = false
@@ -51,7 +53,7 @@ class RepositoriesViewModel(
             getTopStarredRepo()
             getTopTrendingRepo()
             getLargestTrendingRepo()
-            getBeginnerFriendly()
+            getActiveRepo()
         }
     }
 
@@ -146,6 +148,39 @@ class RepositoriesViewModel(
                         it.copy(
                             topLargestRepoList = res.data ?: emptyList(),
                             isLargestRepoLoading = false
+                        )
+                    }
+                }
+            }
+
+        }
+    }
+
+    private suspend fun getActiveRepo() {
+        getActiveRepoUseCase.invoke().collect { res ->
+            when (res) {
+                is NetworkResult.Error -> {
+                    _state.update {
+                        it.copy(
+                            error = res.message,
+                            isActiveRepoLoading = false
+                        )
+                    }
+                }
+
+                NetworkResult.Loading -> {
+                    _state.update {
+                        it.copy(
+                            isActiveRepoLoading = true
+                        )
+                    }
+                }
+
+                is NetworkResult.Success -> {
+                    _state.update {
+                        it.copy(
+                            activeRepoList = res.data ?: emptyList(),
+                            isActiveRepoLoading = false
                         )
                     }
                 }
