@@ -75,7 +75,11 @@ kotlin {
             implementation(libs.bundles.koin.common)
 
         }
-        commonTest.dependencies {
+
+        commonTest.dependencies {iosMain.dependencies {
+            implementation(libs.ktor.client.ios)
+        }
+
             implementation(libs.kotlin.test)
         }
     }
