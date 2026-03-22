@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.kundutechstudio.ranks.domain.dao.DevItem
 import com.kundutechstudio.ranks.domain.dao.RepoItemDAO
-import com.kundutechstudio.ranks.presentation.models.DevItem
 import com.kundutechstudio.ranks.presentation.rank_screen.Repositories.RepositoriesRootScreen
 import com.kundutechstudio.theme.Components.Navigationcomponents.DevRankTabs
 import com.kundutechstudio.theme.Components.Navigationcomponents.PageHeader

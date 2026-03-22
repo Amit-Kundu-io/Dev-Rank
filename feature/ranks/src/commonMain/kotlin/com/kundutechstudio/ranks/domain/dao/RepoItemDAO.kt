@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.kundutechstudio.theme.Components.Badgecomponents.TrendingType
 
 data class RepoItemDAO(
+    val id: Long,
     val name: String,
     val owner: String,
     val description: String,

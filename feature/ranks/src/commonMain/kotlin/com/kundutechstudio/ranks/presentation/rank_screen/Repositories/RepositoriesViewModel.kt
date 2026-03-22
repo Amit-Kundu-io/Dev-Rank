@@ -3,7 +3,9 @@ package com.kundutechstudio.ranks.presentation.rank_screen.Repositories
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kundutechstudio.network.res.NetworkResult
+import com.kundutechstudio.ranks.domain.use_case.get_top_Treanding_repo_use_case.GetTopTrendingRepoUseCase
 import com.kundutechstudio.ranks.domain.use_case.get_top_starred_repo_use_case.GetTopStarredRepoUseCase
+import com.kunduthchstudio.utility.GlobalUtility
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,7 +16,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 
 class RepositoriesViewModel(
-    private val getTopStarredRepoUseCase: GetTopStarredRepoUseCase
+    private val getTopStarredRepoUseCase: GetTopStarredRepoUseCase,
+    private val getTopTrendingRepoUseCase: GetTopTrendingRepoUseCase,
 ) : ViewModel() {
 
     private var hasLoadedInitialData = false
@@ -25,6 +28,7 @@ class RepositoriesViewModel(
             if (!hasLoadedInitialData) {
                 /** Load initial data here **/
                 getTopStarredRepo()
+                getTopTrendingRepo()
                 hasLoadedInitialData = true
             }
         }
@@ -71,4 +75,41 @@ class RepositoriesViewModel(
 
         }.launchIn(viewModelScope)
     }
+
+
+
+    private fun getTopTrendingRepo() {
+        val today = GlobalUtility.getLast7DaysDate()
+        getTopTrendingRepoUseCase.invoke(today).onEach { res ->
+            when (res) {
+                is NetworkResult.Error -> {
+                    _state.update {
+                        it.copy(
+                            error = res.message,
+                            isTopRepoLoading = false
+                        )
+                    }
+                }
+
+                NetworkResult.Loading -> {
+                    _state.update {
+                        it.copy(
+                            isTopRepoLoading = true
+                        )
+                    }
+                }
+
+                is NetworkResult.Success -> {
+                    _state.update {
+                        it.copy(
+                            topTrendingRepoList = res.data ?: emptyList(),
+                            isTopRepoLoading = false
+                        )
+                    }
+                }
+            }
+
+        }.launchIn(viewModelScope)
+    }
+
 }

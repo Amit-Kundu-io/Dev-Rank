@@ -51,6 +51,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.network)
             implementation(projects.theme)
+            implementation(projects.utility)
             implementation(projects.feature.auth)
             implementation(projects.feature.bottomNavigation)
             implementation(projects.feature.compare)

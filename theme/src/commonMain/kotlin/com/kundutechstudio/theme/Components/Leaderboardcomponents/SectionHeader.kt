@@ -51,7 +51,7 @@ fun SectionHeader(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = Spacing.xl, vertical = Spacing.sm),
+            .padding(vertical = Spacing.sm),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

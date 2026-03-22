@@ -8,6 +8,7 @@ import com.kundutechstudio.theme.Helpers.Helpers.getTrendingType
 
 fun TopStarredRepoItem.toRepoItem(rank: Int): RepoItemDAO {
     return RepoItemDAO(
+        id = id ?: 0L,
         name = name.orEmpty(),
         owner = owner?.login.orEmpty(),
         description = description.orEmpty(),

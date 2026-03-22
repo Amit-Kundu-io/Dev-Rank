@@ -10,4 +10,12 @@ class RankRepoImpl(
     override suspend fun getTopStarredRepos(): RepoResponse {
         return apis.getTopStarredRepos()
     }
+
+    override suspend fun getTrendingReposToday(
+        today: String,
+        authorization: String?
+    ): RepoResponse {
+        return apis.getTodayTrendingRepos(today, authorization)
+    }
+
 }

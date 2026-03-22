@@ -16,13 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.kundutechstudio.ranks.domain.dao.DevItem
 import com.kundutechstudio.ranks.domain.dao.RepoItemDAO
-import com.kundutechstudio.ranks.presentation.models.DevItem
-import com.kundutechstudio.ranks.presentation.models.RepoVerticalCard
-import com.kundutechstudio.ranks.presentation.models.largestRepos
-import com.kundutechstudio.ranks.presentation.models.trendingRepos
 import com.kundutechstudio.theme.Components.Cardcomponents.RepoHorizontalCard
 import com.kundutechstudio.theme.Components.Cardcomponents.RepoHorizontalCardSkeleton
+import com.kundutechstudio.theme.Components.Cardcomponents.RepoVerticalCard.RepoVerticalCard
+import com.kundutechstudio.theme.Components.Cardcomponents.RepoVerticalCard.RepoVerticalCardSkeleton
 import com.kundutechstudio.theme.Components.Leaderboardcomponents.SectionHeader
 import com.kundutechstudio.theme.ui.AccentBlueGhost
 import com.kundutechstudio.theme.ui.AccentBlueLight
@@ -61,6 +60,7 @@ private fun RepositoriesScreen(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
+            .padding(horizontal = Spacing.xl)
             .background(BgDefault),
         contentPadding = PaddingValues(bottom = CardSize.navBarHeight + Spacing.lg),
         verticalArrangement = Arrangement.spacedBy(0.dp),
@@ -79,7 +79,6 @@ private fun RepositoriesScreen(
         }
         item {
             LazyRow(
-                contentPadding = PaddingValues(horizontal = Spacing.xl),
                 horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
             ) {
                 if (state.isStarredRepoLoading) {
@@ -113,17 +112,33 @@ private fun RepositoriesScreen(
         // Trending
         item {
             SectionHeader(
-                title = "🔥 Trending Today",
+                title = "🔥 Trending Now",
                 onViewAll = onViewAllRepos,
             )
         }
-        items(trendingRepos) { repo ->
-            RepoVerticalCard(
-                repo = repo,
-                onClick = { onRepoClick(repo) },
-                modifier = Modifier.padding(horizontal = Spacing.xl),
-            )
-            Spacer(Modifier.height(Spacing.sm))
+        if (state.isTopRepoLoading) {
+            items(3) {
+                RepoVerticalCardSkeleton()
+                Spacer(Modifier.height(Spacing.sm))
+            }
+        } else {
+            items(
+                items = state.topTrendingRepoList.take(3),
+                key = { it.id }) { repo ->
+                RepoVerticalCard(
+                    onClick = { onRepoClick(repo) },
+                    id = repo.id,
+                    name = repo.name,
+                    owner = repo.owner,
+                    description = repo.description,
+                    stars = repo.stars,
+                    language = repo.language,
+                    rank = repo.rank,
+                    trendingLabel = repo.trendingLabel,
+                    trendingType = repo.trendingType,
+                )
+                Spacer(Modifier.height(Spacing.sm))
+            }
         }
         item { Spacer(Modifier.height(8.dp)) }
 
@@ -137,11 +152,19 @@ private fun RepositoriesScreen(
                 onViewAll = onViewAllRepos,
             )
         }
-        items(largestRepos) { repo ->
+        items(state.topTrendingRepoList) { repo ->
             RepoVerticalCard(
-                repo = repo,
                 onClick = { onRepoClick(repo) },
                 modifier = Modifier.padding(horizontal = Spacing.xl),
+                id = repo.id,
+                name = repo.name,
+                owner = repo.owner,
+                description = repo.description,
+                stars = repo.stars,
+                language = repo.language,
+                rank = repo.rank,
+                trendingLabel = repo.trendingLabel,
+                trendingType = repo.trendingType,
             )
             Spacer(Modifier.height(Spacing.sm))
         }
