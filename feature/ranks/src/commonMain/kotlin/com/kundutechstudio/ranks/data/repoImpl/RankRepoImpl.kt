@@ -18,4 +18,8 @@ class RankRepoImpl(
         return apis.getTodayTrendingRepos(today, authorization)
     }
 
+    override suspend fun getLargestRepos(authorization: String?): RepoResponse {
+        return apis.getLargestRepos(authorization)
+    }
+
 }

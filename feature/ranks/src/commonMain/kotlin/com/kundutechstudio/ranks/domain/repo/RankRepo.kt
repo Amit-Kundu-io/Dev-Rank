@@ -10,4 +10,8 @@ interface RankRepo {
         today: String,
         authorization: String? = null
     ): RepoResponse
+
+    suspend fun getLargestRepos(
+        authorization: String? = null
+    ): RepoResponse
 }

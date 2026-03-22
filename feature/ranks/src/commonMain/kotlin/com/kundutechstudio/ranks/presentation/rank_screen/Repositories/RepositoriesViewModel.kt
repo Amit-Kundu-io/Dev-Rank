@@ -3,6 +3,7 @@ package com.kundutechstudio.ranks.presentation.rank_screen.Repositories
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kundutechstudio.network.res.NetworkResult
+import com.kundutechstudio.ranks.domain.use_case.get_largest_repos_use_case.GetLargestReposUseCase
 import com.kundutechstudio.ranks.domain.use_case.get_top_Treanding_repo_use_case.GetTopTrendingRepoUseCase
 import com.kundutechstudio.ranks.domain.use_case.get_top_starred_repo_use_case.GetTopStarredRepoUseCase
 import com.kunduthchstudio.utility.GlobalUtility
@@ -18,6 +19,7 @@ import kotlinx.coroutines.flow.update
 class RepositoriesViewModel(
     private val getTopStarredRepoUseCase: GetTopStarredRepoUseCase,
     private val getTopTrendingRepoUseCase: GetTopTrendingRepoUseCase,
+    private val getLargestReposUseCase: GetLargestReposUseCase,
 ) : ViewModel() {
 
     private var hasLoadedInitialData = false
@@ -29,6 +31,7 @@ class RepositoriesViewModel(
                 /** Load initial data here **/
                 getTopStarredRepo()
                 getTopTrendingRepo()
+                getLargestTrendingRepo()
                 hasLoadedInitialData = true
             }
         }
@@ -76,8 +79,6 @@ class RepositoriesViewModel(
         }.launchIn(viewModelScope)
     }
 
-
-
     private fun getTopTrendingRepo() {
         val today = GlobalUtility.getLast7DaysDate()
         getTopTrendingRepoUseCase.invoke(today).onEach { res ->
@@ -104,6 +105,39 @@ class RepositoriesViewModel(
                         it.copy(
                             topTrendingRepoList = res.data ?: emptyList(),
                             isTopRepoLoading = false
+                        )
+                    }
+                }
+            }
+
+        }.launchIn(viewModelScope)
+    }
+
+    private fun getLargestTrendingRepo() {
+        getLargestReposUseCase.invoke().onEach { res ->
+            when (res) {
+                is NetworkResult.Error -> {
+                    _state.update {
+                        it.copy(
+                            error = res.message,
+                            isLargestRepoLoading = false
+                        )
+                    }
+                }
+
+                NetworkResult.Loading -> {
+                    _state.update {
+                        it.copy(
+                            isLargestRepoLoading = true
+                        )
+                    }
+                }
+
+                is NetworkResult.Success -> {
+                    _state.update {
+                        it.copy(
+                            topLargestRepoList = res.data ?: emptyList(),
+                            isLargestRepoLoading = false
                         )
                     }
                 }

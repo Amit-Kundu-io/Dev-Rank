@@ -152,24 +152,30 @@ private fun RepositoriesScreen(
                 onViewAll = onViewAllRepos,
             )
         }
-        items(state.topTrendingRepoList) { repo ->
-            RepoVerticalCard(
-                onClick = { onRepoClick(repo) },
-                modifier = Modifier.padding(horizontal = Spacing.xl),
-                id = repo.id,
-                name = repo.name,
-                owner = repo.owner,
-                description = repo.description,
-                stars = repo.stars,
-                language = repo.language,
-                rank = repo.rank,
-                trendingLabel = repo.trendingLabel,
-                trendingType = repo.trendingType,
-            )
-            Spacer(Modifier.height(Spacing.sm))
+
+        if (state.isLargestRepoLoading) {
+            items(3) {
+                RepoVerticalCardSkeleton()
+                Spacer(Modifier.height(Spacing.sm))
+            }
+        } else {
+            items(state.topLargestRepoList.take(3)) { repo ->
+                RepoVerticalCard(
+                    onClick = { onRepoClick(repo) },
+                    id = repo.id,
+                    name = repo.name,
+                    owner = repo.owner,
+                    description = repo.description,
+                    stars = repo.stars,
+                    language = repo.language,
+                    rank = repo.rank,
+                    trendingLabel = repo.trendingLabel,
+                    trendingType = repo.trendingType,
+                )
+                Spacer(Modifier.height(Spacing.sm))
+            }
         }
     }
-
 }
 
 @Preview
