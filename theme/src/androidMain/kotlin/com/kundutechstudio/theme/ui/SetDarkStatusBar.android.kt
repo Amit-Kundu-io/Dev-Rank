@@ -17,7 +17,7 @@ actual fun SetDarkStatusBar() {
 
     SideEffect {
         val window = (view.context as Activity).window
-        window.statusBarColor = Color(0xFF161B22).toArgb()
+        window.statusBarColor = Color(0xFF0D1117).toArgb()
 
         WindowCompat.getInsetsController(window, view)
             .isAppearanceLightStatusBars = false

@@ -193,6 +193,18 @@ private fun PreviewLeaderboardRows() {
                 true,
                 isMe = true
             )
+
+            LeaderboardRow(
+                999,
+                "AK",
+                "arjun-kapoor",
+                "Sr. Eng · Google",
+                "3.2K",
+                "followers",
+                delta = null,
+                true,
+                isMe = true
+            )
         }
     }
 }

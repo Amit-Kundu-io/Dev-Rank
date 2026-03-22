@@ -35,6 +35,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.kundutechstudio.bottom_navigation.navigation.BottomNavigation
 import com.kundutechstudio.ranks.presentation.navigation.RankRoutes
+import com.kundutechstudio.theme.ui.BgDefault
 import com.kundutechstudio.theme.ui.BgOverlay
 
 
@@ -73,7 +74,7 @@ fun BottomScreen() {
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .background(BgOverlay)
+            .background(BgDefault)
             .statusBarsPadding()
             .navigationBarsPadding(),
 

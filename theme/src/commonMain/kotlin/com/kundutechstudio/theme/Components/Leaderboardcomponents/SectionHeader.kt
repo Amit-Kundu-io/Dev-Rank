@@ -1,6 +1,8 @@
 package com.kundutechstudio.theme.Components.Leaderboardcomponents
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,18 +11,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kundutechstudio.theme.Components.Badgecomponents.SectionBadge
+import com.kundutechstudio.theme.ui.AccentBlue
 import com.kundutechstudio.theme.ui.AccentBlueGhost
 import com.kundutechstudio.theme.ui.AccentBlueLight
 import com.kundutechstudio.theme.ui.AccentGreen
 import com.kundutechstudio.theme.ui.AccentGreenGhost
+import com.kundutechstudio.theme.ui.BorderWidth
 import com.kundutechstudio.theme.ui.DevRankTheme
+import com.kundutechstudio.theme.ui.PillShape
 import com.kundutechstudio.theme.ui.Spacing
 import com.kundutechstudio.theme.ui.StarYellow
 import com.kundutechstudio.theme.ui.StarYellowGhost
@@ -39,39 +47,59 @@ fun SectionHeader(
     modifier: Modifier = Modifier,
 ) {
     Row(
-        verticalAlignment     = Alignment.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier              = modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = Spacing.xl, vertical = Spacing.sm),
     ) {
         Row(
-            verticalAlignment     = Alignment.CenterVertically,
+            verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
         ) {
             Text(
-                text       = title,
-                color      = TextPrimary,
-                fontSize   = 14.sp,
+                text = title,
+                color = TextPrimary,
+                fontSize = 18.sp,
                 fontWeight = FontWeight.ExtraBold,
-                style      = MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.headlineSmall,
             )
             badgeLabel?.let {
                 SectionBadge(it, badgeColor, badgeBg)
             }
         }
         onViewAll?.let {
-            Text(
-                text       = "All →",
-                color      = AccentBlueLight,
-                fontSize   = 11.sp,
-                fontWeight = FontWeight.SemiBold,
-                modifier   = Modifier.clickable(onClick = it),
-            )
+            ViewAllButton(onClick = it)
         }
     }
 }
 
+@Composable
+fun ViewAllButton(
+    onClick: () -> Unit,
+    label: String = "All →",
+    modifier: Modifier = Modifier,
+) {
+    Text(
+        text = label,
+        color = AccentBlueLight,
+        fontSize = 11.sp,
+        fontWeight = FontWeight.SemiBold,
+        modifier = modifier
+            .clip(PillShape)
+            .border(
+                width = BorderWidth.default,
+                color = AccentBlue.copy(alpha = 0.4f),
+                shape = PillShape,
+            )
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = onClick,
+            )
+            .padding(horizontal = Spacing.md, vertical = 5.dp),
+    )
+}
 
 @Preview(showBackground = true, backgroundColor = 0xFF0D1117)
 @Composable

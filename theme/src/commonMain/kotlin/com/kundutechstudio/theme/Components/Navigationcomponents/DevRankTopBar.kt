@@ -54,35 +54,38 @@ fun DevRankTopBar(
     trailingContent: @Composable (() -> Unit)? = null,
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = modifier
-            .fillMaxWidth()
-            .background(BgDefault)
-            .padding(horizontal = Spacing.xl, vertical = Spacing.md),
-    ) {
-        if (showBack) {
+    Column {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = modifier
+                .fillMaxWidth()
+                .background(BgDefault)
+                .padding(horizontal = Spacing.xl, vertical = Spacing.md),
+        ) {
+            if (showBack) {
+                Text(
+                    text = "← Back",
+                    color = AccentBlueLight,
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier.clickable(onClick = onBack),
+                )
+            } else {
+                Spacer(Modifier.width(Spacing.xl))
+            }
+
             Text(
-                text = "← Back",
-                color = AccentBlueLight,
-                fontSize = 13.sp,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.clickable(onClick = onBack),
+                text = title,
+                color = TextPrimary,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.titleLarge,
             )
-        } else {
-            Spacer(Modifier.width(Spacing.xl))
+
+            trailingContent?.invoke() ?: Spacer(Modifier.width(Spacing.xxxl))
         }
-
-        Text(
-            text = title,
-            color = TextPrimary,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.titleLarge,
-        )
-
-        trailingContent?.invoke() ?: Spacer(Modifier.width(Spacing.xl))
+        Spacer(modifier = Modifier.fillMaxWidth().height(1.dp).background(BgOverlay))
     }
 }
 

@@ -1,19 +1,13 @@
 package com.kundutechstudio.ranks.presentation.models
 
 
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -26,6 +20,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kundutechstudio.ranks.domain.dao.RepoItemDAO
 import com.kundutechstudio.theme.Components.Badgecomponents.StarChip
 import com.kundutechstudio.theme.Components.Badgecomponents.TrendingBadge
 import com.kundutechstudio.theme.Components.Badgecomponents.TrendingType
@@ -39,17 +34,6 @@ import com.kundutechstudio.theme.Components.Navigationcomponents.NotificationBut
 import com.kundutechstudio.theme.ui.*
 
 
-data class RepoItem(
-    val name: String,
-    val owner: String,
-    val description: String,
-    val stars: String,
-    val language: String,
-    val langColor: Color,
-    val rank: Int? = null,
-    val trendingLabel: String? = null,
-    val trendingType: TrendingType = TrendingType.HOT,
-)
 
 data class DevItem(
     val initials: String,
@@ -76,7 +60,7 @@ data class LeaderboardDevItem(
 // ── Static sample data ────────────────────────────────────────────
 
  val topRepos = listOf(
-    RepoItem(
+    RepoItemDAO(
         "freeCodeCamp",
         "freeCodeCamp",
         "Open-source codebase & curriculum. Learn to code for free.",
@@ -85,7 +69,7 @@ data class LeaderboardDevItem(
         LangJavaScript,
         rank = 1
     ),
-    RepoItem(
+    RepoItemDAO(
         "awesome",
         "sindresorhus",
         "Awesome lists about all kinds of interesting topics.",
@@ -94,7 +78,7 @@ data class LeaderboardDevItem(
         Color(0xFF89E051),
         rank = 2
     ),
-    RepoItem(
+    RepoItemDAO(
         "coding-interview-university",
         "jwasham",
         "A complete computer science study plan for software engineers.",
@@ -103,19 +87,19 @@ data class LeaderboardDevItem(
         Color(0xFF89E051),
         rank = 3
     ),
-    RepoItem(
-        "996.ICU",
-        "996icu",
-        "Repo about the 996 working hour system.",
-        "269K",
-        "HTML",
-        LangHtml,
-        rank = 4
-    ),
+     RepoItemDAO(
+         "996.ICU",
+         "996icu",
+         "Repo about the 996 working hour system.",
+         "269K",
+         "HTML",
+         LangHtml,
+         rank = 4
+     ),
 )
 
  val trendingRepos = listOf(
-    RepoItem(
+    RepoItemDAO(
         "vercel/next.js",
         "vercel",
         "The React Framework for the Web. Production-grade.",
@@ -125,7 +109,7 @@ data class LeaderboardDevItem(
         trendingLabel = "HOT",
         trendingType = TrendingType.HOT
     ),
-    RepoItem(
+    RepoItemDAO(
         "microsoft/vscode",
         "microsoft",
         "Visual Studio Code — open source code editor by Microsoft.",
@@ -135,7 +119,7 @@ data class LeaderboardDevItem(
         trendingLabel = "RISING",
         trendingType = TrendingType.RISING
     ),
-    RepoItem(
+    RepoItemDAO(
         "torvalds/linux",
         "torvalds",
         "Linux kernel source tree.",
@@ -148,7 +132,7 @@ data class LeaderboardDevItem(
 )
 
  val largestRepos = listOf(
-    RepoItem(
+    RepoItemDAO(
         "chromium/chromium",
         "chromium",
         "The official GitHub mirror of the Chromium source.",
@@ -158,7 +142,7 @@ data class LeaderboardDevItem(
         trendingLabel = "BIG",
         trendingType = TrendingType.ANDROID
     ),
-    RepoItem(
+    RepoItemDAO(
         "android/platform_frameworks_base",
         "android",
         "Base application framework for Android.",
@@ -247,7 +231,7 @@ data class LeaderboardDevItem(
 
 @Composable
 fun HomeLeaderboardScreen(
-    onRepoClick: (RepoItem) -> Unit = {},
+    onRepoClick: (RepoItemDAO) -> Unit = {},
     onDevClick: (DevItem) -> Unit = {},
     onViewAllRepos: () -> Unit = {},
     onViewAllDevs: () -> Unit = {},
@@ -488,7 +472,7 @@ fun HomeLeaderboardScreen(
 
 @Composable
  fun RepoVerticalCard(
-    repo: RepoItem,
+    repo: RepoItemDAO,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {

@@ -6,7 +6,7 @@ import androidx.compose.ui.unit.dp
 object Spacing {
     val xs = 4.dp   // icon gaps, tiny inner separators
     val sm = 8.dp   // chip row gaps, inline element spacing
-    val md = 8.dp   // card inner padding (compact mode)
+    val md = 12.dp   // card inner padding (compact mode)
     val lg = 16.dp   // standard card padding, section vertical gap
     val xl = 20.dp   // screen horizontal padding (left/right)
     val xxl = 24.dp   // hero section padding, podium padding
@@ -36,6 +36,7 @@ object IconSize {
 // ── Card Dimensions ───────────────────────────────────────────────
 object CardSize {
     val repoCardMinWidth = 200.dp   // horizontal scroll repo card
+    val repoCardMinHeight = 180.dp   // horizontal scroll repo card
     val devCardMinWidth = 120.dp   // horizontal scroll dev card
     val rankBadgeWidth = 28.dp    // rank number badge width
     val rankBadgeHeight = 28.dp    // rank number badge height

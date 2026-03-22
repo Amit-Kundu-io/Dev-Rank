@@ -10,4 +10,7 @@ object RankRoutes {
     object RankGraph
     @Serializable
     object RankRoute
+
+    @Serializable
+    object TopStarredRepoListRoute
 }

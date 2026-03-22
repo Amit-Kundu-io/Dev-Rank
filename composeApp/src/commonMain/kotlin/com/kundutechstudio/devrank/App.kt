@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.kundutechstudio.devrank.root_navigation.RootNavigation
+import com.kundutechstudio.theme.ui.BgDefault
 import com.kundutechstudio.theme.ui.BgOverlay
 import com.kundutechstudio.theme.ui.DevRankTheme
 
@@ -16,7 +17,7 @@ fun App() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(BgOverlay)
+                .background(BgDefault)
         ) {
             RootNavigation()
         }

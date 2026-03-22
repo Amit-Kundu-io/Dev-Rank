@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.kundutechstudio.ranks.domain.dao.RepoItemDAO
 import com.kundutechstudio.ranks.presentation.models.DevItem
-import com.kundutechstudio.ranks.presentation.models.RepoItem
 import com.kundutechstudio.ranks.presentation.rank_screen.Repositories.RepositoriesRootScreen
 import com.kundutechstudio.theme.Components.Navigationcomponents.DevRankTabs
 import com.kundutechstudio.theme.Components.Navigationcomponents.PageHeader
@@ -24,13 +24,15 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun RankRootScreen(
-    viewModel: RankViewModel = koinViewModel()
+    viewModel: RankViewModel = koinViewModel(),
+    onViewAllRepos: () -> Unit = {},
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     RankScreen(
         state = state,
-        onAction = viewModel::onAction
+        onAction = viewModel::onAction,
+        onViewAllRepos = onViewAllRepos
     )
 }
 
@@ -38,7 +40,7 @@ fun RankRootScreen(
 private fun RankScreen(
     state: RankState,
     onAction: (RankAction) -> Unit,
-    onRepoClick: (RepoItem) -> Unit = {},
+    onRepoClick: (RepoItemDAO) -> Unit = {},
     onDevClick: (DevItem) -> Unit = {},
     onViewAllRepos: () -> Unit = {},
     onViewAllDevs: () -> Unit = {},
@@ -73,7 +75,9 @@ private fun RankScreen(
 
 
         if (selectedTab == 0) {
-            RepositoriesRootScreen()
+            RepositoriesRootScreen(
+                onViewAllRepos = onViewAllRepos
+            )
 
         }
 

@@ -9,12 +9,12 @@ import io.ktor.client.request.parameter
 class Apis(
     private val client: HttpClient
 ) {
-    suspend fun getTopStarredRepos(): List<RepoResponse> {
+    suspend fun getTopStarredRepos():RepoResponse {
         val response = client.get("https://api.github.com/search/repositories") {
             parameter("q", "stars:>1")
             parameter("sort", "stars")
             parameter("order", "desc")
-            parameter("per_page", 50)
+            parameter("per_page", 10)
 
 //            // Optional (recommended)
 //            headers {

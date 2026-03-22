@@ -5,14 +5,9 @@ import com.kundutechstudio.ranks.data.models.RepoResponse.RepoResponse
 import com.kundutechstudio.ranks.domain.repo.RankRepo
 
 class RankRepoImpl(
-    apis: Apis
+    private val apis: Apis
 ) : RankRepo {
-    override suspend fun getTopStarredRepos(
-        q: String,
-        sort: String,
-        order: String,
-        per_page: String
-    ): RepoResponse {
-        TODO("Not yet implemented")
+    override suspend fun getTopStarredRepos(): RepoResponse {
+        return apis.getTopStarredRepos()
     }
 }

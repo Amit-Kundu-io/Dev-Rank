@@ -16,14 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.kundutechstudio.ranks.domain.dao.RepoItemDAO
 import com.kundutechstudio.ranks.presentation.models.DevItem
-import com.kundutechstudio.ranks.presentation.models.RepoItem
 import com.kundutechstudio.ranks.presentation.models.RepoVerticalCard
 import com.kundutechstudio.ranks.presentation.models.largestRepos
-import com.kundutechstudio.ranks.presentation.models.topRepos
 import com.kundutechstudio.ranks.presentation.models.trendingRepos
 import com.kundutechstudio.theme.Components.Cardcomponents.RepoHorizontalCard
+import com.kundutechstudio.theme.Components.Cardcomponents.RepoHorizontalCardSkeleton
 import com.kundutechstudio.theme.Components.Leaderboardcomponents.SectionHeader
 import com.kundutechstudio.theme.ui.AccentBlueGhost
 import com.kundutechstudio.theme.ui.AccentBlueLight
@@ -37,13 +36,15 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun RepositoriesRootScreen(
-    viewModel: RepositoriesViewModel = koinViewModel()
+    viewModel: RepositoriesViewModel = koinViewModel(),
+    onViewAllRepos: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     RepositoriesScreen(
         state = state,
-        onAction = viewModel::onAction
+        onAction = viewModel::onAction,
+        onViewAllRepos = onViewAllRepos
     )
 }
 
@@ -51,7 +52,7 @@ fun RepositoriesRootScreen(
 private fun RepositoriesScreen(
     state: RepositoriesState,
     onAction: (RepositoriesAction) -> Unit,
-    onRepoClick: (RepoItem) -> Unit = {},
+    onRepoClick: (RepoItemDAO) -> Unit = {},
     onDevClick: (DevItem) -> Unit = {},
     onViewAllRepos: () -> Unit = {},
     onViewAllDevs: () -> Unit = {},
@@ -64,10 +65,12 @@ private fun RepositoriesScreen(
         contentPadding = PaddingValues(bottom = CardSize.navBarHeight + Spacing.lg),
         verticalArrangement = Arrangement.spacedBy(0.dp),
     ) {
+
         // Most Starred
         item {
+            Spacer(Modifier.height(Spacing.lg))
             SectionHeader(
-                title = "⭐ Most Starred",
+                title = "⭐ Top Starred",
                 badgeLabel = "REPOS",
                 badgeColor = StarYellow,
                 badgeBg = StarYellowGhost,
@@ -79,20 +82,32 @@ private fun RepositoriesScreen(
                 contentPadding = PaddingValues(horizontal = Spacing.xl),
                 horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
             ) {
-                items(topRepos) { repo ->
-                    RepoHorizontalCard(
-                        repoName = repo.name,
-                        ownerName = repo.owner,
-                        description = repo.description,
-                        stars = repo.stars,
-                        language = repo.language,
-                        langColor = repo.langColor,
-                        rank = repo.rank,
-                        onClick = { onRepoClick(repo) },
-                    )
+                if (state.isStarredRepoLoading) {
+
+                    items(3) {
+                        RepoHorizontalCardSkeleton()
+                    }
+
+                } else {
+                    items(
+                        items = state.topStarredRepoList.take(5),
+                        key = { it.name }
+                    ) { repo ->
+                        RepoHorizontalCard(
+                            repoName = repo.name,
+                            ownerName = repo.owner,
+                            description = repo.description,
+                            stars = repo.stars,
+                            language = repo.language,
+                            langColor = repo.langColor,
+                            rank = repo.rank,
+                            onClick = { onRepoClick(repo) },
+                            isLoading = state.isStarredRepoLoading
+                        )
+                    }
                 }
             }
-            Spacer(Modifier.height(Spacing.xxl))
+            Spacer(Modifier.height(Spacing.lg))
         }
 
         // Trending

@@ -3,8 +3,32 @@ package com.kundutechstudio.ranks.data.models.RepoResponse
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class Item(
+data class TopStarredRepoItem(
+
+    @SerialName("name")
+    val name: String? = null,
+
+    @SerialName("full_name")
+    val fullName: String? = null,
+
+    @SerialName("description")
+    val description: String? = null,
+
+    @SerialName("stargazers_count")
+    val stars: Int? = null,
+
+    @SerialName("language")
+    val language: String? = null,
+
+    @SerialName("owner")
+    val owner: Owner? = null
+)
+
+/*
+@Serializable
+data class TopStarredRepoItem(
 
     @SerialName("allow_forking") val allowForking: Boolean? = null,
     @SerialName("archive_url") val archiveUrl: String? = null,
@@ -89,3 +113,5 @@ data class Item(
     @SerialName("watchers_count") val watchersCount: Int? = null,
     @SerialName("web_commit_signoff_required") val webCommitSignoffRequired: Boolean? = null
 )
+
+ */
