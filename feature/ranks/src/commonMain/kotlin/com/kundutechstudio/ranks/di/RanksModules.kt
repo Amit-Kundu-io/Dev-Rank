@@ -3,6 +3,7 @@ package com.kundutechstudio.ranks.di
 import com.kundutechstudio.ranks.data.Apis.Apis
 import com.kundutechstudio.ranks.data.repoImpl.RankRepoImpl
 import com.kundutechstudio.ranks.domain.repo.RankRepo
+import com.kundutechstudio.ranks.domain.use_case.get_beginner_friendly_use_case.GetBeginnerFriendlyUseCase
 import com.kundutechstudio.ranks.domain.use_case.get_largest_repos_use_case.GetLargestReposUseCase
 import com.kundutechstudio.ranks.domain.use_case.get_top_Treanding_repo_use_case.GetTopTrendingRepoUseCase
 import com.kundutechstudio.ranks.domain.use_case.get_top_starred_repo_use_case.GetTopStarredRepoUseCase
@@ -23,6 +24,7 @@ fun getRanksModules() = module {
     factoryOf(::GetTopStarredRepoUseCase)
     factoryOf(::GetTopTrendingRepoUseCase)
     factoryOf(::GetLargestReposUseCase)
+    factoryOf(::GetBeginnerFriendlyUseCase)
 
     viewModelOf(::RankViewModel)
     viewModelOf(::RepositoriesViewModel)

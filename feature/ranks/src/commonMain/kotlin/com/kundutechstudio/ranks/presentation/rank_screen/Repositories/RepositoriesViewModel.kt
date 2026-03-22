@@ -3,23 +3,23 @@ package com.kundutechstudio.ranks.presentation.rank_screen.Repositories
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kundutechstudio.network.res.NetworkResult
+import com.kundutechstudio.ranks.domain.use_case.get_beginner_friendly_use_case.GetBeginnerFriendlyUseCase
 import com.kundutechstudio.ranks.domain.use_case.get_largest_repos_use_case.GetLargestReposUseCase
 import com.kundutechstudio.ranks.domain.use_case.get_top_Treanding_repo_use_case.GetTopTrendingRepoUseCase
 import com.kundutechstudio.ranks.domain.use_case.get_top_starred_repo_use_case.GetTopStarredRepoUseCase
 import com.kunduthchstudio.utility.GlobalUtility
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class RepositoriesViewModel(
     private val getTopStarredRepoUseCase: GetTopStarredRepoUseCase,
     private val getTopTrendingRepoUseCase: GetTopTrendingRepoUseCase,
     private val getLargestReposUseCase: GetLargestReposUseCase,
+    private val getBeginnerFriendlyUseCase: GetBeginnerFriendlyUseCase,
 ) : ViewModel() {
 
     private var hasLoadedInitialData = false
@@ -29,9 +29,7 @@ class RepositoriesViewModel(
         .onStart {
             if (!hasLoadedInitialData) {
                 /** Load initial data here **/
-                getTopStarredRepo()
-                getTopTrendingRepo()
-                getLargestTrendingRepo()
+                initData()
                 hasLoadedInitialData = true
             }
         }
@@ -47,8 +45,18 @@ class RepositoriesViewModel(
         }
     }
 
-    private fun getTopStarredRepo() {
-        getTopStarredRepoUseCase.invoke().onEach { res ->
+    fun initData() {
+        //One by one Call because of GitHub api call rate limit
+        viewModelScope.launch {
+            getTopStarredRepo()
+            getTopTrendingRepo()
+            getLargestTrendingRepo()
+            getBeginnerFriendly()
+        }
+    }
+
+    private suspend fun getTopStarredRepo() {
+        getTopStarredRepoUseCase.invoke().collect { res ->
             when (res) {
                 is NetworkResult.Error -> {
                     _state.update {
@@ -76,12 +84,12 @@ class RepositoriesViewModel(
                 }
             }
 
-        }.launchIn(viewModelScope)
+        }
     }
 
-    private fun getTopTrendingRepo() {
+    private suspend fun getTopTrendingRepo() {
         val today = GlobalUtility.getLast7DaysDate()
-        getTopTrendingRepoUseCase.invoke(today).onEach { res ->
+        getTopTrendingRepoUseCase.invoke(today).collect { res ->
             when (res) {
                 is NetworkResult.Error -> {
                     _state.update {
@@ -110,11 +118,11 @@ class RepositoriesViewModel(
                 }
             }
 
-        }.launchIn(viewModelScope)
+        }
     }
 
-    private fun getLargestTrendingRepo() {
-        getLargestReposUseCase.invoke().onEach { res ->
+    private suspend fun getLargestTrendingRepo() {
+        getLargestReposUseCase.invoke().collect { res ->
             when (res) {
                 is NetworkResult.Error -> {
                     _state.update {
@@ -143,7 +151,40 @@ class RepositoriesViewModel(
                 }
             }
 
-        }.launchIn(viewModelScope)
+        }
+    }
+
+    private suspend fun getBeginnerFriendly() {
+        getBeginnerFriendlyUseCase.invoke().collect { res ->
+            when (res) {
+                is NetworkResult.Error -> {
+                    _state.update {
+                        it.copy(
+                            error = res.message,
+                            isBeginnerLoading = false
+                        )
+                    }
+                }
+
+                NetworkResult.Loading -> {
+                    _state.update {
+                        it.copy(
+                            isBeginnerLoading = true
+                        )
+                    }
+                }
+
+                is NetworkResult.Success -> {
+                    _state.update {
+                        it.copy(
+                            beginnerFriendlyRepoList = res.data ?: emptyList(),
+                            isBeginnerLoading = false
+                        )
+                    }
+                }
+            }
+
+        }
     }
 
 }

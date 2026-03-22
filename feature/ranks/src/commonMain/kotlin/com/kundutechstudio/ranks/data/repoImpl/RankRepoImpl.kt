@@ -22,4 +22,20 @@ class RankRepoImpl(
         return apis.getLargestRepos(authorization)
     }
 
+    override suspend fun getRepositories(
+        query: String,
+        sort: String,
+        order: String,
+        perPage: Int,
+        authorization: String?
+    ): RepoResponse {
+        return apis.getRepositories(
+            query = query,
+            sort = sort,
+            order = order,
+            perPage = perPage,
+            authorization = authorization
+        )
+    }
+
 }

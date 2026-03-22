@@ -153,13 +153,61 @@ private fun RepositoriesScreen(
             )
         }
 
-        if (state.isLargestRepoLoading) {
+        item {
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+            ) {
+                if (state.isLargestRepoLoading) {
+
+                    items(3) {
+                        RepoHorizontalCardSkeleton()
+                    }
+
+                } else {
+                    items(
+                        items = state.topLargestRepoList.take(5),
+                        key = { it.name }
+                    ) { repo ->
+                        RepoHorizontalCard(
+                            repoName = repo.name,
+                            ownerName = repo.owner,
+                            description = repo.description,
+                            stars = repo.stars,
+                            language = repo.language,
+                            langColor = repo.langColor,
+                            rank = repo.rank,
+                            onClick = { onRepoClick(repo) },
+                            isLoading = state.isStarredRepoLoading
+                        )
+                    }
+                }
+            }
+            Spacer(Modifier.height(Spacing.lg))
+        }
+
+
+        //Beginner Friendly project
+
+        // Most Starred
+        item {
+            Spacer(Modifier.height(Spacing.lg))
+            SectionHeader(
+                title = "\uD83C\uDF31 Beginner Friendly",
+                badgeLabel = "REPOS",
+                badgeColor = StarYellow,
+                badgeBg = StarYellowGhost,
+                onViewAll = onViewAllRepos,
+            )
+        }
+        if (state.isBeginnerLoading) {
             items(3) {
                 RepoVerticalCardSkeleton()
                 Spacer(Modifier.height(Spacing.sm))
             }
         } else {
-            items(state.topLargestRepoList.take(3)) { repo ->
+            items(
+                items = state.beginnerFriendlyRepoList.take(3),
+                key = { it.id }) { repo ->
                 RepoVerticalCard(
                     onClick = { onRepoClick(repo) },
                     id = repo.id,
@@ -175,6 +223,8 @@ private fun RepositoriesScreen(
                 Spacer(Modifier.height(Spacing.sm))
             }
         }
+
+
     }
 }
 
