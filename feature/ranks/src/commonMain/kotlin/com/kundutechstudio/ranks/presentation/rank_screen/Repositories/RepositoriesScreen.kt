@@ -71,7 +71,7 @@ private fun RepositoriesScreen(
             Spacer(Modifier.height(Spacing.lg))
             SectionHeader(
                 title = "⭐ Top Starred",
-                badgeLabel = "REPOS",
+                badgeLabel = "STAR",
                 badgeColor = StarYellow,
                 badgeBg = StarYellowGhost,
                 onViewAll = onViewAllRepos,
@@ -113,6 +113,9 @@ private fun RepositoriesScreen(
         item {
             SectionHeader(
                 title = "🔥 Trending Now",
+                badgeLabel = "CREATE",
+                badgeColor = AccentBlueLight,
+                badgeBg = AccentBlueGhost,
                 onViewAll = onViewAllRepos,
             )
         }
@@ -147,29 +150,95 @@ private fun RepositoriesScreen(
             SectionHeader(
                 title = "💻 Largest Projects",
                 badgeLabel = "SIZE",
+                badgeColor = StarYellow,
+                badgeBg = StarYellowGhost,
+                onViewAll = onViewAllRepos,
+            )
+        }
+
+        item {
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+            ) {
+                if (state.isLargestRepoLoading) {
+
+                    items(3) {
+                        RepoHorizontalCardSkeleton()
+                    }
+
+                } else {
+                    items(
+                        items = state.topLargestRepoList.take(5),
+                        key = { it.name }
+                    ) { repo ->
+                        RepoHorizontalCard(
+                            repoName = repo.name,
+                            ownerName = repo.owner,
+                            description = repo.description,
+                            stars = repo.stars,
+                            language = repo.language,
+                            langColor = repo.langColor,
+                            rank = repo.rank,
+                            onClick = { onRepoClick(repo) },
+                            isLoading = state.isStarredRepoLoading
+                        )
+                    }
+                }
+            }
+            Spacer(Modifier.height(Spacing.lg))
+        }
+
+
+        //Beginner Friendly project
+        //🚀 4. Active Projects
+        // Most Starred
+        item {
+            Spacer(Modifier.height(Spacing.lg))
+            SectionHeader(
+                title = "\uD83D\uDE80 4. Active Projects",
+                badgeLabel = "STAR",
                 badgeColor = AccentBlueLight,
                 badgeBg = AccentBlueGhost,
                 onViewAll = onViewAllRepos,
             )
         }
-        items(state.topTrendingRepoList) { repo ->
-            RepoVerticalCard(
-                onClick = { onRepoClick(repo) },
-                modifier = Modifier.padding(horizontal = Spacing.xl),
-                id = repo.id,
-                name = repo.name,
-                owner = repo.owner,
-                description = repo.description,
-                stars = repo.stars,
-                language = repo.language,
-                rank = repo.rank,
-                trendingLabel = repo.trendingLabel,
-                trendingType = repo.trendingType,
-            )
-            Spacer(Modifier.height(Spacing.sm))
+//        item {
+//            Spacer(Modifier.height(Spacing.lg))
+//            SectionHeader(
+//                title = "\uD83C\uDF31 Beginner Friendly",
+//                badgeLabel = "REPOS",
+//                badgeColor = StarYellow,
+//                badgeBg = StarYellowGhost,
+//                onViewAll = onViewAllRepos,
+//            )
+//        }
+        if (state.isActiveRepoLoading) {
+            items(3) {
+                RepoVerticalCardSkeleton()
+                Spacer(Modifier.height(Spacing.sm))
+            }
+        } else {
+            items(
+                items = state.activeRepoList.take(3),
+                key = { it.id }) { repo ->
+                RepoVerticalCard(
+                    onClick = { onRepoClick(repo) },
+                    id = repo.id,
+                    name = repo.name,
+                    owner = repo.owner,
+                    description = repo.description,
+                    stars = repo.stars,
+                    language = repo.language,
+                    rank = repo.rank,
+                    trendingLabel = repo.trendingLabel,
+                    trendingType = repo.trendingType,
+                )
+                Spacer(Modifier.height(Spacing.sm))
+            }
         }
-    }
 
+
+    }
 }
 
 @Preview
