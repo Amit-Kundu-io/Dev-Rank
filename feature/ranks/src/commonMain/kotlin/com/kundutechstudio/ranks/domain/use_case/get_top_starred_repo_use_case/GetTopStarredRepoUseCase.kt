@@ -1,5 +1,7 @@
 package com.kundutechstudio.ranks.domain.use_case.get_top_starred_repo_use_case
 
+import com.kundutechstudio.database.cache_key.CacheKey
+import com.kundutechstudio.database.domain.repo.CacheDataSourceRepo
 import com.kundutechstudio.network.res.NetworkResult
 import com.kundutechstudio.ranks.domain.dao.RepoItemDAO
 import com.kundutechstudio.ranks.domain.mapper.toRepoItem
@@ -7,36 +9,52 @@ import com.kundutechstudio.ranks.domain.repo.RankRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.serialization.builtins.ListSerializer
 import kotlin.collections.emptyList
 
 class GetTopStarredRepoUseCase(
-    private val repo: RankRepo
+    private val repo: RankRepo,
+    private val cache: CacheDataSourceRepo
 ) {
 
-        operator fun invoke(): Flow<NetworkResult<List<RepoItemDAO>>> = flow {
+    private val serializer = ListSerializer(RepoItemDAO.serializer())
 
-            emit(NetworkResult.Loading)
+    operator fun invoke(): Flow<NetworkResult<List<RepoItemDAO>>> = flow {
 
-            try {
-                val response = repo.getTopStarredRepos()
+        emit(NetworkResult.Loading)
 
-                val data: List<RepoItemDAO> = response.items?.mapIndexed { index, item ->
-                    item.toRepoItem(rank = index + 1)
-                } ?: emptyList()
+        //  Try cache first
+        val cached = cache.read(CacheKey.TOP_STARRED, serializer)
 
-                emit(NetworkResult.Success(data))
+        if (!cached.isNullOrEmpty()) {
+            emit(NetworkResult.Success(cached))
+            return@flow
+        }
 
-            } catch (e: Exception) {
-                emit(
-                    NetworkResult.Error(
-                        message = e.message ?: "Something went wrong",
-                        cause = e
-                    )
-                )
+        //  API call
+        val response = repo.getTopStarredRepos()
+
+        val data = response.items
+            ?.mapIndexed { index, item ->
+                item.toRepoItem(rank = index + 1)
             }
+            .orEmpty()
 
-        }.flowOn(Dispatchers.IO)
-    }
+        // Save cache
+        cache.save(CacheKey.TOP_STARRED, data, serializer)
+
+        emit(NetworkResult.Success(data))
+
+    }.catch { e ->
+        emit(
+            NetworkResult.Error(
+                message = e.message ?: "Something went wrong",
+                cause = e
+            )
+        )
+    }.flowOn(Dispatchers.IO)
+}
