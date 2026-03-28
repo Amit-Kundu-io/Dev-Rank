@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -53,6 +54,7 @@ fun CustomBottomBar(
         modifier = Modifier
             .fillMaxWidth()
             .background(BgOverlay)
+            .pointerInput(Unit) {}
     ) {
         // ── Top divider — subtle gradient line ───────────────────
         Canvas(

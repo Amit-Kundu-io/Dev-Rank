@@ -50,12 +50,10 @@ class RepositoriesViewModel(
     }
 
     fun initData() {
-        //One by one Call because of GitHub api call rate limit
         viewModelScope.launch {
-            delay(5_000)
-          //getTopStarredRepo()
-           // getTopTrendingRepo()
-           // getLargestTrendingRepo()
+            getTopStarredRepo()
+            getTopTrendingRepo()
+            getLargestTrendingRepo()
             getActiveRepo()
         }
     }

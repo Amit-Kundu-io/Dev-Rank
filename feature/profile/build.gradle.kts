@@ -50,6 +50,12 @@ kotlin {
 
         }
         commonMain.dependencies {
+
+            implementation(projects.theme)
+            implementation(projects.network)
+            implementation(projects.utility)
+            implementation(projects.database)
+
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
