@@ -1,9 +1,10 @@
 package com.kunduthchstudio.utility.platform_utility
 
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
-import kotlin.time.Clock
+import platform.Foundation.NSDate
+import platform.Foundation.timeIntervalSince1970
 
 actual object PlatformUtility {
-
+    actual fun currentTimeSeconds(): Long {
+        return NSDate().timeIntervalSince1970.toLong()
+    }
 }

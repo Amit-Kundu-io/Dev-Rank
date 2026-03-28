@@ -53,6 +53,7 @@ kotlin {
             implementation(projects.theme)
             implementation(projects.network)
             implementation(projects.utility)
+            implementation(projects.database)
 
 
             implementation(libs.compose.runtime)

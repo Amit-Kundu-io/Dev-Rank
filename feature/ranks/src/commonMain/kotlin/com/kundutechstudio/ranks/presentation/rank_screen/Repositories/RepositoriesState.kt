@@ -8,11 +8,11 @@ data class RepositoriesState(
     val isLoading: Boolean = false,
     val error : String = "",
 
-    val isStarredRepoLoading: Boolean = true,
-    val isTopRepoLoading: Boolean = true,
-    val isLargestRepoLoading: Boolean = true,
-    val isBeginnerLoading: Boolean = true,
-    val isActiveRepoLoading: Boolean = true,
+    val isStarredRepoLoading: Boolean = false,
+    val isTopRepoLoading: Boolean = false,
+    val isLargestRepoLoading: Boolean = false,
+    val isBeginnerLoading: Boolean = false,
+    val isActiveRepoLoading: Boolean = false,
 
     val topStarredRepoList: List<RepoItemDAO> = emptyList(),
     val topTrendingRepoList: List<RepoItemDAO> = emptyList(),

@@ -23,6 +23,7 @@ import com.kundutechstudio.theme.Components.Cardcomponents.RepoHorizontalCardSke
 import com.kundutechstudio.theme.Components.Cardcomponents.RepoVerticalCard.RepoVerticalCard
 import com.kundutechstudio.theme.Components.Cardcomponents.RepoVerticalCard.RepoVerticalCardSkeleton
 import com.kundutechstudio.theme.Components.Leaderboardcomponents.SectionHeader
+import com.kundutechstudio.theme.Helpers.Helpers.getLanguageColor
 import com.kundutechstudio.theme.ui.AccentBlueGhost
 import com.kundutechstudio.theme.ui.AccentBlueLight
 import com.kundutechstudio.theme.ui.BgDefault
@@ -98,7 +99,7 @@ private fun RepositoriesScreen(
                             description = repo.description,
                             stars = repo.stars,
                             language = repo.language,
-                            langColor = repo.langColor,
+                            langColor = getLanguageColor(repo.language),
                             rank = repo.rank,
                             onClick = { onRepoClick(repo) },
                             isLoading = state.isStarredRepoLoading
@@ -177,7 +178,7 @@ private fun RepositoriesScreen(
                             description = repo.description,
                             stars = repo.stars,
                             language = repo.language,
-                            langColor = repo.langColor,
+                            langColor = getLanguageColor(repo.language),
                             rank = repo.rank,
                             onClick = { onRepoClick(repo) },
                             isLoading = state.isStarredRepoLoading

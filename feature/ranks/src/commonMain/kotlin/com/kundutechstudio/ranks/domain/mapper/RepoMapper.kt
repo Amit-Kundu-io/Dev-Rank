@@ -14,7 +14,6 @@ fun TopStarredRepoItem.toRepoItem(rank: Int): RepoItemDAO {
         description = description.orEmpty(),
         stars = formatStars(stars ?: 0),
         language = language.orEmpty(),
-        langColor = getLanguageColor(language),
         rank = rank,
         trendingLabel = null,
         trendingType = getTrendingType(stars ?: 0)
