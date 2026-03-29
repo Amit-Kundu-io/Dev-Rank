@@ -30,5 +30,12 @@ object GlobalUtility {
             .toString()
     }
 
+    @OptIn(ExperimentalTime::class)
+    fun getCurrentYear(): String {
+        return Clock.System.now()
+            .toLocalDateTime(TimeZone.currentSystemDefault())
+            .year
+            .toString()
+    }
 
 }

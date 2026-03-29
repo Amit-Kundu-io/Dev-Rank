@@ -31,8 +31,8 @@ private fun PrefileScreen(
     Column {
         YourRankCard(
             initials = "AK",
-            username = "Arjun Kapoor",
-            handle = "arjun-kapoor",
+            username = "Amit Kundu",
+            handle = "Amit-Kundu-io",
             globalRank = 2456,
             followers = "3.2K",
             repos = "128",
@@ -47,7 +47,7 @@ private fun PrefileScreen(
         }
 
         ContributionHeatmap(
-            levels = fakeData,
+            levels = fakeData,//state.contributionData,
             modifier = Modifier.padding(Spacing.lg),
         )
 

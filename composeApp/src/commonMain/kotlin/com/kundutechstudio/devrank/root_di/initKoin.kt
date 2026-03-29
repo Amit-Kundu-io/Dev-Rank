@@ -2,6 +2,7 @@ package com.kundutechstudio.devrank.root_di
 
 
 import cb.pulse.network.di.getNetworkModule
+import com.kundutechstudio.auth.di.authModules
 import com.kundutechstudio.database.Di.databaseModules
 import com.kundutechstudio.profile.di.profileModule
 import com.kundutechstudio.ranks.di.getRanksModules
@@ -19,6 +20,7 @@ fun initKoin(koinApplication: ((KoinApplication) -> Unit)? = null) {
             getRanksModules(),
             databaseModules(),
             profileModule(),
+            authModules(),
         )
     }
 }

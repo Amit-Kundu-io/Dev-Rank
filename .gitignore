@@ -17,3 +17,4 @@ captures
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 node_modules/
+utility/src/commonMain/kotlin/com/kunduthchstudio/utility/API_KEY.kt
