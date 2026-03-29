@@ -36,8 +36,7 @@ class Apis(
 
         return client.post("https://api.github.com/graphql") {
             token?.let {
-                header("Authorization", "Bearer 
-                       ")
+                header("Authorization", "Bearer")
             }
 
             header("Content-Type", "application/json")

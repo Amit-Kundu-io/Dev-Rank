@@ -26,9 +26,14 @@ class TopStarredRepoListViewModel : ViewModel() {
         )
 
     fun onAction(action: TopStarredRepoListAction) {
+        /*
         when (action) {
-            else -> TODO("Handle actions")
+            else -> {
+
+            }
         }
+
+         */
     }
 
 }

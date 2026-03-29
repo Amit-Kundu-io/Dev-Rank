@@ -44,9 +44,14 @@ class RepositoriesViewModel(
         )
 
     fun onAction(action: RepositoriesAction) {
+        /*
         when (action) {
-            else -> TODO("Handle actions")
+            else ->{
+
+            }
         }
+
+         */
     }
 
     fun initData() {

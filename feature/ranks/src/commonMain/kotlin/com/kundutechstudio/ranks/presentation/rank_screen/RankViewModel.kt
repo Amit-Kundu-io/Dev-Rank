@@ -26,9 +26,12 @@ class RankViewModel : ViewModel() {
         )
 
     fun onAction(action: RankAction) {
+        /*
         when (action) {
-            else -> TODO("Handle actions")
+            //else -> {}
         }
+
+         */
     }
 
 }
