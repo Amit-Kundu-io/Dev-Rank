@@ -1,5 +1,7 @@
 package com.kundutechstudio.ranks.domain.use_case.get_top_Treanding_repo_use_case
 
+import com.kundutechstudio.database.cache_key.CacheKey
+import com.kundutechstudio.database.domain.repo.CacheDataSourceRepo
 import com.kundutechstudio.network.res.NetworkResult
 import com.kundutechstudio.ranks.domain.dao.RepoItemDAO
 import com.kundutechstudio.ranks.domain.mapper.toRepoItem
@@ -7,12 +9,17 @@ import com.kundutechstudio.ranks.domain.repo.RankRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.serialization.builtins.ListSerializer
 
 class GetTopTrendingRepoUseCase(
-    private val repo: RankRepo
+    private val repo: RankRepo,
+    private val cache: CacheDataSourceRepo
 ) {
+
+    private val serializer = ListSerializer(RepoItemDAO.serializer())
 
     operator fun invoke(
         today: String
@@ -20,23 +27,34 @@ class GetTopTrendingRepoUseCase(
 
         emit(NetworkResult.Loading)
 
-        try {
-            val response = repo.getTrendingReposToday(today)
+        // Try cache first
+        val cached = cache.read(CacheKey.TRENDING, serializer)
 
-            val data: List<RepoItemDAO> = response.items?.mapIndexed { index, item ->
-                item.toRepoItem(rank = index + 1)
-            } ?: emptyList()
-
-            emit(NetworkResult.Success(data))
-
-        } catch (e: Exception) {
-            emit(
-                NetworkResult.Error(
-                    message = e.message ?: "Something went wrong",
-                    cause = e
-                )
-            )
+        if (!cached.isNullOrEmpty()) {
+            emit(NetworkResult.Success(cached))
+            return@flow
         }
 
+        // API call
+        val response = repo.getTrendingReposToday(today)
+
+        val data = response.items
+            ?.mapIndexed { index, item ->
+                item.toRepoItem(rank = index + 1)
+            }
+            .orEmpty()
+
+        // Save cache
+        cache.save(CacheKey.TRENDING, data, serializer)
+
+        emit(NetworkResult.Success(data))
+
+    }.catch { e ->
+        emit(
+            NetworkResult.Error(
+                message = e.message ?: "Something went wrong",
+                cause = e
+            )
+        )
     }.flowOn(Dispatchers.IO)
 }

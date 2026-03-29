@@ -9,6 +9,8 @@ import com.kundutechstudio.ranks.domain.use_case.get_largest_repos_use_case.GetL
 import com.kundutechstudio.ranks.domain.use_case.get_top_Treanding_repo_use_case.GetTopTrendingRepoUseCase
 import com.kundutechstudio.ranks.domain.use_case.get_top_starred_repo_use_case.GetTopStarredRepoUseCase
 import com.kunduthchstudio.utility.GlobalUtility
+import com.kunduthchstudio.utility.Logger.Logger
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
@@ -48,7 +50,6 @@ class RepositoriesViewModel(
     }
 
     fun initData() {
-        //One by one Call because of GitHub api call rate limit
         viewModelScope.launch {
             getTopStarredRepo()
             getTopTrendingRepo()
@@ -160,6 +161,7 @@ class RepositoriesViewModel(
         getActiveRepoUseCase.invoke().collect { res ->
             when (res) {
                 is NetworkResult.Error -> {
+                    Logger.d("BEBUGGING",res.message)
                     _state.update {
                         it.copy(
                             error = res.message,

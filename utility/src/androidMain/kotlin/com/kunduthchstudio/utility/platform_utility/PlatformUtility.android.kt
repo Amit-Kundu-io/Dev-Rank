@@ -5,5 +5,8 @@ import androidx.annotation.RequiresApi
 import java.time.LocalDate
 
 actual object PlatformUtility {
+    actual fun currentTimeSeconds(): Long {
+        return System.currentTimeMillis() / 1000
+    }
 
 }

@@ -9,5 +9,6 @@ plugins {
     alias(libs.plugins.kotlinAndroid) apply false
     alias(libs.plugins.androidMultiplatformLibrary) apply false
     alias(libs.plugins.serialization) apply false
-
+    alias(libs.plugins.androidx.room) apply false
+    alias(libs.plugins.ksp) apply false
 }

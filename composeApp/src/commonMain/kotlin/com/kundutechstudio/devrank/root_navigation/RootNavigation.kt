@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.kundutechstudio.auth.navigation.AuthRouts
-import com.kundutechstudio.auth.navigation.authNavigation
+import com.kundutechstudio.auth.presentation.navigation.AuthRouts
+import com.kundutechstudio.auth.presentation.navigation.authNavigation
 import com.kundutechstudio.bottom_navigation.BottomScreen
 import com.kundutechstudio.bottom_navigation.navigation.BottomRoutes
 
@@ -20,7 +20,9 @@ fun RootNavigation() {
         authNavigation(
             navController,
             navigateToDashboard = {
-                navController.navigate(BottomRoutes.BottomGraph)
+                navController.navigate(BottomRoutes.BottomGraph) {
+                    popUpTo(AuthRouts.AuthGraph) { inclusive = true }
+                }
             })
 
         composable<BottomRoutes.BottomGraph> {

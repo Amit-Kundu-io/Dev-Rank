@@ -51,6 +51,7 @@ kotlin {
             implementation(projects.network)
             implementation(projects.theme)
             implementation(projects.utility)
+            implementation(projects.database)
             implementation(projects.feature.auth)
             implementation(projects.feature.bottomNavigation)
             implementation(projects.feature.compare)

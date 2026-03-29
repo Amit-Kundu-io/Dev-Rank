@@ -11,12 +11,9 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -34,9 +31,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.kundutechstudio.bottom_navigation.navigation.BottomNavigation
+import com.kundutechstudio.profile.presentation.navigation.ProfileRoutes
 import com.kundutechstudio.ranks.presentation.navigation.RankRoutes
 import com.kundutechstudio.theme.ui.BgDefault
-import com.kundutechstudio.theme.ui.BgOverlay
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
@@ -60,6 +57,10 @@ fun BottomScreen() {
 
         isShowBottomNav = when (currentRoute) {
             RankRoutes.RankRoute::class.qualifiedName -> {
+                true
+            }
+
+            ProfileRoutes.ProfileRoute::class.qualifiedName -> {
                 true
             }
 
@@ -122,23 +123,7 @@ fun AppBottomNav(
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    val route = currentDestination?.route
 
-    var isShowBottomNav by remember { mutableStateOf(true) }
-
-    LaunchedEffect(route) {
-        isShowBottomNav = when {
-            route?.contains("attendance") == true -> false
-            route?.contains("punch") == true -> false
-            else -> true
-        }
-    }
-
-    AnimatedVisibility(
-        visible = isShowBottomNav,
-        enter = fadeIn() + slideInVertically { it / 2 },
-        exit = fadeOut() + slideOutVertically { it / 2 }
-    ) {
         CustomBottomBar(
             items = items,
             currentDestination = currentDestination,
@@ -152,5 +137,5 @@ fun AppBottomNav(
                 }
             }
         )
-    }
+
 }

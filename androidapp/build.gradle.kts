@@ -33,6 +33,7 @@ android {
 
 dependencies {
     implementation(projects.composeApp)
+    implementation(projects.utility)
     implementation(libs.compose.uiToolingPreview)
     implementation(libs.androidx.activity.compose)
 
