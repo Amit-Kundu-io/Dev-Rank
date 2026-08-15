@@ -1,9 +1,9 @@
 package com.kundutechstudio.auth.data.repo_impl
 
-import com.kunduthchstudio.utility.CLIENT_ID
-import com.kunduthchstudio.utility.CLIENT_SECRET
+import com.kunduthchstudio.utility.GitHubConfig.CLIENT_ID
+import com.kunduthchstudio.utility.GitHubConfig.CLIENT_SECRET
+import com.kunduthchstudio.utility.GitHubConfig.REDIRECT_URI
 import com.kunduthchstudio.utility.Logger.Logger
-import com.kunduthchstudio.utility.REDIRECT_URI
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.headers
