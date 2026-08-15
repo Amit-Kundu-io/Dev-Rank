@@ -18,3 +18,6 @@ captures
 **/xcshareddata/WorkspaceSettings.xcsettings
 node_modules/
 utility/src/commonMain/kotlin/com/kunduthchstudio/utility/API_KEY.kt
+
+# Local GitHub OAuth configuration
+utility/src/commonMain/kotlin/com/kunduthchstudio/utility/GitHubConfig.kt
