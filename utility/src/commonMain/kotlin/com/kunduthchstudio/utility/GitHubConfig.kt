@@ -15,6 +15,21 @@
 
 package com.kunduthchstudio.utility
 
+/**
+ * Run this once in the terminal:
+ *
+ * git update-index --assume-unchanged "utility/src/commonMain/kotlin/com/kunduthchstudio/utility/GitHubConfig.kt"
+ *
+ * Why:
+ * This tells Git to ignore local changes to this tracked configuration file,
+ * so local GitHub credentials/configuration changes are not included
+ * when you commit and push changes.
+ *
+ * Note:
+ * This does NOT remove the file from Git or make it secure.
+ * Do not store production secrets in this file.
+ */
+
 object GitHubConfig {
 
     const val CLIENT_ID = "YOUR_GITHUB_CLIENT_ID"
