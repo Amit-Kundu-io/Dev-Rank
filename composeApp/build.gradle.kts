@@ -36,6 +36,7 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+
         }
     }
     
@@ -48,6 +49,9 @@ kotlin {
 
         }
         commonMain.dependencies {
+            implementation(projects.feature.auth)
+
+
             implementation(projects.network)
             implementation(projects.theme)
             implementation(projects.utility)

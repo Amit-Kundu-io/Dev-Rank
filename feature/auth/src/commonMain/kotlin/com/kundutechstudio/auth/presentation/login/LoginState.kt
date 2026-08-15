@@ -5,6 +5,7 @@ import androidx.compose.runtime.Immutable
 @Immutable
 data class LoginState(
     val isLoading: Boolean = false,
-    val token: String? = null,
-    val error: String? = null
+    val isLoggedIn: Boolean = false,
+    val error: String? = null,
+    val token : String? = null
 )
