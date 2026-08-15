@@ -7,11 +7,18 @@ import com.kundutechstudio.profile.domain.repo.PrefileRepo
 class PrefileRepoImpl(
     private val apis: Apis
 ) : PrefileRepo {
-    override suspend fun getContributionResponse(
-        username: String,
-        token: String?
+    override suspend fun getProfile(
+        username: String?,
+        token: String?,
+        from: String,
+        to: String
     ): GraphQLResponse {
-        return apis.getContributionGraph(username,token)
+        return apis.getProfile(
+            username = username,
+            token = token,
+            from = from,
+            to = to
+        )
     }
 
 

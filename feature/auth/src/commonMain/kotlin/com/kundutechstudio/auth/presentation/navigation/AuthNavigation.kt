@@ -51,28 +51,19 @@ fun NavGraphBuilder.authNavigation(
             )
         ) { backStackEntry ->
 
-            Logger.d(
-                "DEV_RANK_AUTH",
-                "LOGIN ROUTE COMPOSED"
-            )
+            Logger.d("DEV_RANK_AUTH", "LOGIN ROUTE COMPOSED")
 
             val route =
                 backStackEntry.toRoute<AuthRouts.LoginRoute>()
 
-            Logger.d(
-                "DEV_RANK_AUTH",
-                "CALLBACK CODE = ${route.code}"
-            )
+            Logger.d("DEV_RANK_AUTH", "CALLBACK CODE = ${route.code}")
 
             val viewModel: LoginViewModel =
                 koinViewModel()
 
             LaunchedEffect(route.code) {
 
-                Logger.d(
-                    "DEV_RANK_AUTH",
-                    "DEEPLINK LaunchedEffect"
-                )
+                Logger.d("DEV_RANK_AUTH", "DEEPLINK LaunchedEffect")
 
                 if (!route.code.isNullOrEmpty()) {
 
@@ -90,11 +81,7 @@ fun NavGraphBuilder.authNavigation(
             LoginRootScreen(
                 viewModel = viewModel,
                 onLoginSuccess = {
-                    Logger.d(
-                        "DEV_RANK_AUTH",
-                        "NAVIGATING TO DASHBOARD"
-                    )
-
+                    Logger.d("DEV_RANK_AUTH", "NAVIGATING TO DASHBOARD")
                     navigateToDashboard()
                 }
             )

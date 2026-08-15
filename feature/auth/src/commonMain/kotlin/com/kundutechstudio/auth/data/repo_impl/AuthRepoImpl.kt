@@ -1,22 +1,20 @@
 package com.kundutechstudio.auth.data.repo_impl
 
+import com.kundutechstudio.database.datastore.DRDataStore
 import com.kunduthchstudio.utility.GitHubConfig
 import com.kunduthchstudio.utility.Logger.Logger
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.request.forms.submitForm
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.statement.bodyAsText
-import io.ktor.http.Parameters
-import io.ktor.http.headers
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
+
 class AuthRepository(
-    private val httpClient: HttpClient
+    private val httpClient: HttpClient,
+    private val drDataStore: DRDataStore
 ) {
 
     suspend fun exchangeCodeForToken(code: String): Result<String> {
@@ -49,6 +47,8 @@ class AuthRepository(
             }
 
             Logger.d("DEV_RANK_AUTH", "TOKEN API: access token received")
+
+            drDataStore.setToken(token)
 
             token
         }

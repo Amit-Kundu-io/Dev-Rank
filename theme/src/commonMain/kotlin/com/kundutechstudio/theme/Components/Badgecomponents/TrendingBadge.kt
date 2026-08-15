@@ -29,7 +29,7 @@ import com.kundutechstudio.theme.ui.Spacing
 /**
  * TrendingBadge — "🔥 Hot", "📈 Rising", "📱 Android" section labels
  */
-enum class TrendingType { HOT, RISING, NEW, ANDROID, BEGINNER }
+enum class TrendingType { HOT, RISING, NEW, ANDROID, BEGINNER,PUBLIC, PRIVATE }
 
 @Composable
 fun TrendingBadge(
@@ -43,6 +43,8 @@ fun TrendingBadge(
         TrendingType.NEW -> AccentGreenGhost to AccentGreen
         TrendingType.ANDROID -> AccentBlueGhost to AccentBlueLight
         TrendingType.BEGINNER -> AccentGreenGhost to AccentGreen
+        TrendingType.PRIVATE -> AccentBlueGhost to AccentBlueLight
+        TrendingType.PUBLIC -> AccentGreenGhost to AccentGreen
     }
 
     Box(

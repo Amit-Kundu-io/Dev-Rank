@@ -38,7 +38,9 @@ import com.kundutechstudio.theme.ui.BgDefault
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun BottomScreen() {
+fun BottomScreen(
+    navigateToLoginPage: () -> Unit
+) {
     val navController = rememberNavController()
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
     var isShowBottomNav by remember {
@@ -110,7 +112,10 @@ fun BottomScreen() {
         }
     ) { padding ->
         Box {
-            BottomNavigation(navController)
+            BottomNavigation(
+                navController,
+                navigateToLoginPage = navigateToLoginPage
+            )
         }
     }
 }

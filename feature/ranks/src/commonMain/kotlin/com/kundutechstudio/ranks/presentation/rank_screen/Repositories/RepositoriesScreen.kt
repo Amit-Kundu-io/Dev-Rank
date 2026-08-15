@@ -131,13 +131,10 @@ private fun RepositoriesScreen(
                 key = { it.id }) { repo ->
                 RepoVerticalCard(
                     onClick = { onRepoClick(repo) },
-                    id = repo.id,
                     name = repo.name,
-                    owner = repo.owner,
                     description = repo.description,
                     stars = repo.stars,
                     language = repo.language,
-                    rank = repo.rank,
                     trendingLabel = repo.trendingLabel,
                     trendingType = repo.trendingType,
                 )
@@ -224,13 +221,10 @@ private fun RepositoriesScreen(
                 key = { it.id }) { repo ->
                 RepoVerticalCard(
                     onClick = { onRepoClick(repo) },
-                    id = repo.id,
                     name = repo.name,
-                    owner = repo.owner,
                     description = repo.description,
                     stars = repo.stars,
                     language = repo.language,
-                    rank = repo.rank,
                     trendingLabel = repo.trendingLabel,
                     trendingType = repo.trendingType,
                 )

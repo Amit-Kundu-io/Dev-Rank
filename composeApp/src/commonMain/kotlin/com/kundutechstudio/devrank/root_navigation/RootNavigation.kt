@@ -26,7 +26,13 @@ fun RootNavigation() {
             })
 
         composable<BottomRoutes.BottomGraph> {
-            BottomScreen()
+            BottomScreen(
+                navigateToLoginPage = {
+                    navController.navigate(
+                        AuthRouts.LoginRoute()
+                    )
+                }
+            )
         }
     }
 }
