@@ -14,21 +14,13 @@ class MainActivity : ComponentActivity() {
         savedInstanceState: Bundle?
     ) {
 
-        super.onCreate(
-            savedInstanceState
-        )
+        super.onCreate(savedInstanceState)
 
         enableEdgeToEdge()
 
-        Logger.d(
-            "DEV_RANK_AUTH",
-            "MAIN ACTIVITY CREATED"
-        )
+        Logger.d("DEV_RANK_AUTH", "MAIN ACTIVITY CREATED")
 
-        Logger.d(
-            "DEV_RANK_AUTH",
-            "INITIAL URI = ${intent?.data}"
-        )
+        Logger.d("DEV_RANK_AUTH", "INITIAL URI = ${intent?.data}")
 
         setContent {
             App()
@@ -41,37 +33,23 @@ class MainActivity : ComponentActivity() {
          */
         intent?.data?.toString()?.let {
 
-            Logger.d(
-                "DEV_RANK_AUTH",
-                "INITIAL OAUTH CALLBACK"
-            )
+            Logger.d("DEV_RANK_AUTH", "INITIAL OAUTH CALLBACK")
 
             OAuthCallbackBridge.handle(it)
         }
     }
 
-    override fun onNewIntent(
-        intent: Intent
-    ) {
+    override fun onNewIntent(intent: Intent) {
 
-        super.onNewIntent(
-            intent
-        )
+        super.onNewIntent(intent)
 
         setIntent(intent)
 
-        Logger.d(
-            "DEV_RANK_AUTH",
-            "MAIN ACTIVITY onNewIntent"
-        )
+        Logger.d("DEV_RANK_AUTH", "MAIN ACTIVITY onNewIntent")
 
-        Logger.d(
-            "DEV_RANK_AUTH",
-            "CALLBACK URI = ${intent.data}"
-        )
+        Logger.d("DEV_RANK_AUTH", "CALLBACK URI = ${intent.data}")
 
         intent.data?.toString()?.let {
-
             OAuthCallbackBridge.handle(it)
         }
     }
