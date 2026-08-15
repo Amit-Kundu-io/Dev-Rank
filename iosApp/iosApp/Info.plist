@@ -4,6 +4,16 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>devrank</string>
+            </array>
+        </dict>
+    </array>
+
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

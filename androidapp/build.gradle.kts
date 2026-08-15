@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature:auth"))
     implementation(projects.composeApp)
     implementation(projects.utility)
     implementation(libs.compose.uiToolingPreview)
