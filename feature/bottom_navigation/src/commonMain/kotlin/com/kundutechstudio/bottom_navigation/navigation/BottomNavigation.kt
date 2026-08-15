@@ -9,7 +9,9 @@ import com.kundutechstudio.ranks.presentation.navigation.rankNavigation
 
 @Composable
 fun BottomNavigation(
-    navController: NavHostController
+    navController: NavHostController,
+    navigateToLoginPage: () -> Unit
+
 ) {
 
     NavHost(
@@ -17,6 +19,9 @@ fun BottomNavigation(
         startDestination = RankRoutes.RankGraph,
     ) {
         rankNavigation(navController)
-        profileNavigation(navController)
+        profileNavigation(
+            navController,
+            navigateToLoginPage = navigateToLoginPage
+        )
     }
 }

@@ -6,12 +6,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.kundutechstudio.profile.presentation.PrefileScreen.PrefileRootScreen
 
-fun NavGraphBuilder.profileNavigation(navController: NavHostController) {
+fun NavGraphBuilder.profileNavigation(
+    navController: NavHostController,
+    navigateToLoginPage: () -> Unit
+) {
 
     navigation<ProfileRoutes.ProfileGraph>(startDestination = ProfileRoutes.ProfileRoute) {
 
         composable<ProfileRoutes.ProfileRoute> {
-            PrefileRootScreen()
+            PrefileRootScreen(
+                navigateToLoginPage = navigateToLoginPage,
+            )
         }
     }
 }

@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kundutechstudio.theme.Components.Badgecomponents.StarChip
@@ -32,19 +33,17 @@ import com.kundutechstudio.theme.ui.BgOverlay
 import com.kundutechstudio.theme.ui.BorderMuted
 import com.kundutechstudio.theme.ui.BorderWidth
 import com.kundutechstudio.theme.ui.DevRankShapes
+import com.kundutechstudio.theme.ui.DevRankTheme
 import com.kundutechstudio.theme.ui.Spacing
 import com.kundutechstudio.theme.ui.TextMuted
 import com.kundutechstudio.theme.ui.TextPrimary
 
 @Composable
 fun RepoVerticalCard(
-    id: Long,
     name: String,
-    owner: String,
     description: String,
     stars: String,
     language: String,
-    rank: Int? = null,
     trendingLabel: String? = null,
     trendingType: TrendingType = TrendingType.HOT,
     onClick: () -> Unit,
@@ -53,7 +52,7 @@ fun RepoVerticalCard(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .height(135.dp)
+            //.height(135.dp)
             .clip(DevRankShapes.medium)
             .background(BgOverlay)
             .border(BorderWidth.default, BorderMuted, DevRankShapes.medium)
@@ -74,7 +73,6 @@ fun RepoVerticalCard(
                 fontWeight = FontWeight.Bold,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.weight(1f),
             )
             trendingLabel?.let {
                 Spacer(Modifier.width(Spacing.sm))
@@ -83,14 +81,22 @@ fun RepoVerticalCard(
         }
 
         // ── Description ───────────────────────────────────────────
-        Text(
-            text = description,
-            color = TextMuted,
-            fontSize = 11.sp,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis,
-            lineHeight = 16.sp,
-        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        if (!description.isBlank()){
+            Text(
+                text = description,
+                color = TextMuted,
+                fontSize = 11.sp,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                lineHeight = 16.sp,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+
+        }
+
 
         // ── Row 3: stars + language ───────────────────────────────
         Row(
@@ -111,5 +117,36 @@ fun RepoVerticalCard(
                 Text(text = language, color = TextMuted, fontSize = 10.sp)
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun RepoVerticalCardPreview() {
+    DevRankTheme {
+        Column {
+            RepoVerticalCard(
+                name = "Dev-Rank",
+                description = "A developer ranking platform built with Kotlin Multiplatform and GitHub integration.",
+                stars = "128",
+                language = "Kotlin",
+                trendingLabel = "Trending",
+                trendingType = TrendingType.PUBLIC,
+                onClick = {},
+                modifier = Modifier.fillMaxWidth()
+            )
+            RepoVerticalCard(
+                name = "Dev-Rank",
+                description = "",
+                stars = "128",
+                language = "Kotlin",
+                trendingLabel = "Trending",
+                trendingType = TrendingType.PUBLIC,
+                onClick = {},
+                modifier = Modifier.fillMaxWidth()
+            )
+
+        }
+
     }
 }

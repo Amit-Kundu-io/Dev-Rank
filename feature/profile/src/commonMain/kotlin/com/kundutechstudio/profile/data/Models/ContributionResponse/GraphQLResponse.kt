@@ -4,36 +4,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class GraphQLResponse(
-    val data: Data
+    val data: GraphQLData? = null,
+    val errors: List<GraphQLError>? = null
 )
 
-@Serializable
-data class Data(
-    val user: User
-)
 
 @Serializable
-data class User(
-    val contributionsCollection: ContributionsCollection
-)
-
-@Serializable
-data class ContributionsCollection(
-    val contributionCalendar: ContributionCalendar
-)
-
-@Serializable
-data class ContributionCalendar(
-    val weeks: List<Week>
-)
-
-@Serializable
-data class Week(
-    val contributionDays: List<Day>
-)
-
-@Serializable
-data class Day(
-    val date: String,
-    val contributionCount: Int
+data class GraphQLError(
+    val message: String
 )

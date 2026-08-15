@@ -4,5 +4,10 @@ import com.kundutechstudio.profile.data.Models.ContributionResponse.GraphQLRespo
 
 
 interface PrefileRepo {
-    suspend fun getContributionResponse(username: String,token : String?): GraphQLResponse
+    suspend fun getProfile(
+        username: String? = null,
+        token: String? = null,
+        from: String,
+        to: String
+    ): GraphQLResponse
 }

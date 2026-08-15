@@ -70,6 +70,8 @@ kotlin {
 
             implementation(libs.bundles.koin.common)
             implementation(libs.ktor.client.core)
+
+            implementation(compose.materialIconsExtended)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

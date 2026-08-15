@@ -2,12 +2,15 @@ package com.kundutechstudio.auth.presentation.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kundutechstudio.database.datastore.DRDataStore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 
-class SplashViewModel : ViewModel() {
+class SplashViewModel (
+): ViewModel() {
 
     private var hasLoadedInitialData = false
 
@@ -16,6 +19,7 @@ class SplashViewModel : ViewModel() {
         .onStart {
             if (!hasLoadedInitialData) {
                 /** Load initial data here **/
+
                 hasLoadedInitialData = true
             }
         }
