@@ -69,6 +69,10 @@ kotlin {
 
             implementation(libs.bundles.koin.common)
             implementation(libs.ktor.client.core)
+
+            implementation(libs.datastore)
+            implementation(libs.datastore.preferences)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
