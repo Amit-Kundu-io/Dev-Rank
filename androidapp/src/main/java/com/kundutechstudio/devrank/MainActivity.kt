@@ -5,8 +5,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.kundutechstudio.auth.data.handleOAuthCallback
+import com.kundutechstudio.devrank.oauth.OAuthCallbackBridge
 import com.kunduthchstudio.utility.Logger.Logger
+
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(
@@ -45,7 +46,7 @@ class MainActivity : ComponentActivity() {
                 "INITIAL OAUTH CALLBACK"
             )
 
-            handleOAuthCallback(it)
+            OAuthCallbackBridge.handle(it)
         }
     }
 
@@ -71,7 +72,7 @@ class MainActivity : ComponentActivity() {
 
         intent.data?.toString()?.let {
 
-            handleOAuthCallback(it)
+            OAuthCallbackBridge.handle(it)
         }
     }
 }

@@ -2,7 +2,7 @@ package com.kundutechstudio.auth.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kundutechstudio.auth.data.OAuthCallbackReceiver
+import com.kundutechstudio.auth.data.oauth.OAuthCallbackReceiver
 import com.kundutechstudio.auth.data.repo_impl.AuthRepository
 import com.kunduthchstudio.utility.Logger.Logger
 import kotlinx.coroutines.flow.MutableStateFlow

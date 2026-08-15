@@ -13,23 +13,18 @@
  * code readability and quality.
  */
 
-package com.kundutechstudio.auth.data
-
+package com.kundutechstudio.auth.data.oauth
 
 
 object OAuthCallbackReceiver {
 
     private var callback: ((String) -> Unit)? = null
 
-    fun register(
-        callback: (String) -> Unit
-    ) {
+    fun register(callback: (String) -> Unit) {
         this.callback = callback
     }
 
-    fun onCallback(
-        url: String
-    ) {
+    fun onCallback(url: String) {
         callback?.invoke(url)
     }
 
@@ -37,7 +32,3 @@ object OAuthCallbackReceiver {
         callback = null
     }
 }
-
-expect fun handleOAuthCallback(
-    url: String
-)
