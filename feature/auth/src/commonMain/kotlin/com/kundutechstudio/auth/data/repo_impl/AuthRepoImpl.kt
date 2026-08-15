@@ -50,13 +50,6 @@ class AuthRepository(
 
             Logger.d("DEV_RANK_AUTH", "TOKEN API: access token received")
 
-            /*
-             * Don't log the actual token.
-             */
-
-            Logger.d("DEV_RANK_AUTH", "TOKEN ==== : $token")
-
-
             token
         }
     }
