@@ -73,6 +73,7 @@ fun DevHorizontalCard(
             text = username,
             color = TextPrimary,
             fontSize = 11.sp,
+            lineHeight = 13.sp,
             fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
@@ -82,6 +83,7 @@ fun DevHorizontalCard(
             text = statValue,
             color = AccentBlueLight,
             fontSize = 13.sp,
+            lineHeight = 15.sp,
             fontWeight = androidx.compose.ui.text.font.FontWeight.ExtraBold,
             fontFamily = MaterialTheme.typography.labelLarge.fontFamily,
         )
@@ -90,6 +92,7 @@ fun DevHorizontalCard(
             text = statLabel,
             color = TextSubtle,
             fontSize = 9.sp,
+            lineHeight = 11.sp
         )
     }
 }
@@ -105,7 +108,7 @@ private fun PreviewDevHorizontalCard() {
         ) {
             DevHorizontalCard("TL", "torvalds", "239K", "followers", AccentBlueDark, rank = 1)
             DevHorizontalCard("DS", "defunkt", "195K", "followers", BgSubtle, rank = 2)
-            DevHorizontalCard("SS", "sindresorhus", "92K", "followers", AccentBlue, rank = 5)
+           // DevHorizontalCard("SS", "sindresorhus", "92K", "followers", AccentBlue, rank = 5)
         }
     }
 }

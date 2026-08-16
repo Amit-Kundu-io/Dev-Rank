@@ -4,6 +4,8 @@ import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.minus
 import kotlinx.datetime.toLocalDateTime
+import kotlin.math.pow
+import kotlin.math.round
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
@@ -31,11 +33,18 @@ object GlobalUtility {
     }
 
     @OptIn(ExperimentalTime::class)
-    fun getCurrentYear(): String {
-        return Clock.System.now()
-            .toLocalDateTime(TimeZone.currentSystemDefault())
-            .year
-            .toString()
+    fun getCurrentYear(): String { return Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).year.toString() }
+
+
+    fun Double.roundTo(decimals: Int): String {
+        if (decimals <= 0) {
+            return round(this).toLong().toString()
+        }
+
+        val factor = 10.0.pow(decimals)
+        val rounded = round(this * factor) / factor
+
+        return rounded.toString()
     }
 
 }

@@ -1,5 +1,6 @@
 package com.kundutechstudio.bottom_navigation
 
+import com.amit_kundu_io.compare.navigation.CompareRoutes
 import com.kundutechstudio.profile.presentation.navigation.ProfileRoutes
 import com.kundutechstudio.ranks.presentation.navigation.RankRoutes
 import common.resources.Res
@@ -20,6 +21,12 @@ sealed class BottomNavItem(
         selectedIcon = Res.drawable.ic_home,
     )
 
+    data object Compare : BottomNavItem(
+        route = CompareRoutes.CompareGraph::class.qualifiedName,
+        label = "Compare",
+        selectedIcon = Res.drawable.ic_home,
+    )
+
     data object Prefile : BottomNavItem(
         route = ProfileRoutes.ProfileGraph::class.qualifiedName,
         label = "Prefile",
@@ -32,6 +39,7 @@ sealed class BottomNavItem(
 val bottomNavItems = listOf(
     BottomNavItem.Rank,
     BottomNavItem.Prefile,
+    BottomNavItem.Compare,
 )
 
 

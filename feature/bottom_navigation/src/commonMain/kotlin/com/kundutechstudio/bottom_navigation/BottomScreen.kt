@@ -104,6 +104,7 @@ fun BottomScreen(
                 ) {
 
                     AppBottomNav(
+                        currentRoute = currentRoute,
                         navController = navController,
                         items = bottomNavItems
                     )
@@ -125,13 +126,11 @@ fun BottomScreen(
 fun AppBottomNav(
     navController: NavHostController,
     items: List<BottomNavItem>,
+    currentRoute: String?,
 ) {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination
-
         CustomBottomBar(
             items = items,
-            currentDestination = currentDestination,
+            currentDestination = currentRoute,
             onValueChange = { item ->
                 navController.navigate(item.route ?: "") {
                     popUpTo(RankRoutes.RankRoute::class.qualifiedName ?: "") {

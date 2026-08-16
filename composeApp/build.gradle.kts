@@ -62,6 +62,7 @@ kotlin {
             implementation(projects.feature.profile)
             implementation(projects.feature.ranks)
             implementation(projects.feature.search)
+            implementation(projects.feature.compare)
 
 
             implementation(libs.compose.runtime)

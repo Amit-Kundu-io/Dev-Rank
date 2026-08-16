@@ -47,7 +47,7 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun CustomBottomBar(
     items: List<BottomNavItem>,
-    currentDestination: NavDestination?,
+    currentDestination:String?,
     onValueChange: (BottomNavItem) -> Unit,
 ) {
     Box(
@@ -86,8 +86,7 @@ fun CustomBottomBar(
         ) {
             items.forEach { screen ->
 
-                val isSelected =
-                    currentDestination?.hierarchy?.any { it.route == screen.route } == true
+                val isSelected = currentDestination == screen.route
 
                 // ── Animated colors ──────────────────────────────
                 val iconTint by animateColorAsState(
