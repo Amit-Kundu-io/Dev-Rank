@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.amit_kundu_io.compare.navigation.CompareRoutes
 import com.kundutechstudio.bottom_navigation.navigation.BottomNavigation
 import com.kundutechstudio.profile.presentation.navigation.ProfileRoutes
 import com.kundutechstudio.ranks.presentation.navigation.RankRoutes
@@ -63,6 +64,10 @@ fun BottomScreen(
             }
 
             ProfileRoutes.ProfileRoute::class.qualifiedName -> {
+                true
+            }
+
+            CompareRoutes.CompareRoute::class.qualifiedName -> {
                 true
             }
 
@@ -104,7 +109,6 @@ fun BottomScreen(
                 ) {
 
                     AppBottomNav(
-                        currentRoute = currentRoute,
                         navController = navController,
                         items = bottomNavItems
                     )
@@ -126,20 +130,20 @@ fun BottomScreen(
 fun AppBottomNav(
     navController: NavHostController,
     items: List<BottomNavItem>,
-    currentRoute: String?,
 ) {
-        CustomBottomBar(
-            items = items,
-            currentDestination = currentRoute,
-            onValueChange = { item ->
-                navController.navigate(item.route ?: "") {
-                    popUpTo(RankRoutes.RankRoute::class.qualifiedName ?: "") {
-                        saveState = true
-                    }
-                    launchSingleTop = true
-                    restoreState = true
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+    CustomBottomBar(
+        items = items,
+        currentDestination = currentDestination,
+        onValueChange = { item ->
+            navController.navigate(item.route ?: "") {
+                popUpTo(RankRoutes.RankRoute::class.qualifiedName ?: "") {
+                    saveState = true
                 }
+                launchSingleTop = true
+                restoreState = true
             }
-        )
-
+        }
+    )
 }

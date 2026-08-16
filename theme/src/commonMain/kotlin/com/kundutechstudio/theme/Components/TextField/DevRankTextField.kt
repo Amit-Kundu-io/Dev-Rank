@@ -27,14 +27,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kundutechstudio.theme.Components.Comparecomponents.VsBadge
 import com.kundutechstudio.theme.ui.AccentBlue
 import com.kundutechstudio.theme.ui.AccentBlueLight
 import com.kundutechstudio.theme.ui.AccentGreen
@@ -86,6 +83,7 @@ fun DevRankTextField(
     helperText: String? = null,
     singleLine: Boolean = true,
     maxLines: Int = 1,
+    frontSize : Int = 18,
     enabled: Boolean = variant != TextFieldVariant.Disabled,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
@@ -96,18 +94,25 @@ fun DevRankTextField(
     // Password visibility state
     var passwordVisible by remember { mutableStateOf(false) }
     val isPassword = variant == TextFieldVariant.Password
-    val visualTransformation = if (isPassword && !passwordVisible)
-        PasswordVisualTransformation() else VisualTransformation.None
 
-    // ── Derive colors based on variant + focus ────────────────────
+    val visualTransformation = remember(isPassword, passwordVisible) {
+        if (isPassword && !passwordVisible) {
+            PasswordVisualTransformation()
+        } else {
+            VisualTransformation.None
+        }
+    }
+
+    val borderTargetColor = when {
+        !enabled -> BorderMuted
+        variant == TextFieldVariant.Error -> AccentRed
+        variant == TextFieldVariant.Success -> AccentGreen
+        isFocused -> AccentBlue
+        else -> BorderDefault
+    }
+
     val borderColor by animateColorAsState(
-        targetValue = when {
-            !enabled -> BorderMuted
-            variant == TextFieldVariant.Error -> AccentRed
-            variant == TextFieldVariant.Success -> AccentGreen
-            isFocused -> AccentBlue
-            else -> BorderDefault
-        },
+        targetValue = borderTargetColor,
         animationSpec = tween(180),
         label = "borderColor",
     )
@@ -143,7 +148,8 @@ fun DevRankTextField(
             Text(
                 text = label,
                 color = labelColor,
-                fontSize = 11.sp,
+                fontSize = 13.sp,
+                lineHeight = 15.sp,
                 fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold,
                 letterSpacing = 0.04.sp,
                 fontFamily = MaterialTheme.typography.labelSmall.fontFamily,
@@ -159,7 +165,7 @@ fun DevRankTextField(
             maxLines = if (singleLine) 1 else maxLines,
             textStyle = MaterialTheme.typography.bodyLarge.copy(
                 color = if (enabled) TextPrimary else TextDisabled,
-                fontSize = 14.sp,
+                fontSize = frontSize.sp,
                 fontFamily = MaterialTheme.typography.labelMedium.fontFamily,
             ),
             cursorBrush = SolidColor(cursorColor),
@@ -194,7 +200,7 @@ fun DevRankTextField(
                             Text(
                                 text = placeholder,
                                 color = TextPlaceholder,
-                                fontSize = 14.sp,
+                                fontSize = frontSize.sp,
                                 fontFamily = MaterialTheme.typography.labelMedium.fontFamily,
                             )
                         }
@@ -222,22 +228,6 @@ fun DevRankTextField(
                                 color = TextSubtle,
                             )
                         }
-
-                        value.isNotEmpty() && variant == TextFieldVariant.Default -> {
-                            Text(
-                                text = "✕",
-                                fontSize = 13.sp,
-                                color = TextSubtle,
-                                modifier = Modifier.padding(start = 4.dp),
-                            )
-                        }
-                    }
-
-                    // Status icon
-                    when (variant) {
-                        TextFieldVariant.Success -> Text("✓", fontSize = 14.sp, color = AccentGreen)
-                        TextFieldVariant.Error -> Text("!", fontSize = 14.sp, color = AccentRed)
-                        else -> Unit
                     }
                 }
             },
@@ -263,11 +253,12 @@ fun DevRankTextField(
 }
 
 
-
-
-
-
-@Preview(showBackground = true, backgroundColor = 0xFF0D1117, name = "All Variants")
+@Preview(
+    showBackground = true,
+    showSystemUi = true,
+    backgroundColor = 0xFF0D1117,
+    name = "All Variants"
+)
 @Composable
 private fun PreviewAllVariants() {
     DevRankTheme {

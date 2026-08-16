@@ -4,6 +4,7 @@ import com.amit_kundu_io.compare.navigation.CompareRoutes
 import com.kundutechstudio.profile.presentation.navigation.ProfileRoutes
 import com.kundutechstudio.ranks.presentation.navigation.RankRoutes
 import common.resources.Res
+import common.resources.clone_solid_svgrepo_com
 import common.resources.ic_home
 import common.resources.outline_person_24
 import org.jetbrains.compose.resources.DrawableResource
@@ -24,7 +25,7 @@ sealed class BottomNavItem(
     data object Compare : BottomNavItem(
         route = CompareRoutes.CompareGraph::class.qualifiedName,
         label = "Compare",
-        selectedIcon = Res.drawable.ic_home,
+        selectedIcon = Res.drawable.clone_solid_svgrepo_com,
     )
 
     data object Prefile : BottomNavItem(
@@ -38,8 +39,8 @@ sealed class BottomNavItem(
 
 val bottomNavItems = listOf(
     BottomNavItem.Rank,
-    BottomNavItem.Prefile,
     BottomNavItem.Compare,
+    BottomNavItem.Prefile,
 )
 
 

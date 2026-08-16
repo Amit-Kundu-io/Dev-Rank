@@ -47,4 +47,12 @@ object GlobalUtility {
         return rounded.toString()
     }
 
+
+
+    fun sanitizeGithubId(input: String): String {
+        return input.filter { char ->
+            char.isLetterOrDigit() || char == '-'
+        }
+    }
+
 }
