@@ -121,12 +121,14 @@ fun UserComparePanel(
                     text = row.label,
                     color = TextSubtle,
                     fontSize = 9.sp,
+                    lineHeight = 12.sp,
                     letterSpacing = 0.06.sp,
                 )
                 Text(
                     text = myValue,
                     color = textColor,
                     fontSize = 13.sp,
+                    lineHeight = 15.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = MaterialTheme.typography.labelMedium.fontFamily,
                 )

@@ -44,18 +44,21 @@ fun WinnerBanner(
         Text(
             text = "Winner by Dev Score",
             color = TextMuted,
-            fontSize = 12.sp,
+            lineHeight = 16.sp,
+            fontSize = 15.sp,
         )
         Text(
             text = "$winnerName 🏆",
             color = AccentGreen,
-            fontSize = 16.sp,
+            lineHeight = 21.sp,
+            fontSize = 19.sp,
             fontWeight = FontWeight.ExtraBold,
         )
         Text(
             text = "Score difference: +$scoreDiff pts",
             color = TextSubtle,
-            fontSize = 11.sp,
+            fontSize = 13.sp,
+            lineHeight = 15.sp,
         )
     }
 }

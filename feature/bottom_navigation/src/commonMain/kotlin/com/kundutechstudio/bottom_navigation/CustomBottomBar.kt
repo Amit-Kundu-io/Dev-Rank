@@ -86,8 +86,7 @@ fun CustomBottomBar(
         ) {
             items.forEach { screen ->
 
-                val isSelected =
-                    currentDestination?.hierarchy?.any { it.route == screen.route } == true
+                val isSelected = currentDestination?.hierarchy?.any { it.route == screen.route } == true
 
                 // ── Animated colors ──────────────────────────────
                 val iconTint by animateColorAsState(

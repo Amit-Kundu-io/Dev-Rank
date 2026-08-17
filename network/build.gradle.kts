@@ -66,6 +66,8 @@ kotlin {
 
              */
 
+            implementation(projects.utility)
+
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.bundles.koin.common)
