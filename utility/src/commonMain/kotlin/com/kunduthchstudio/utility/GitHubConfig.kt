@@ -19,8 +19,8 @@ package com.kunduthchstudio.utility
 object GitHubConfig {
 
     //this is key only Demo purpose and any time delete
-    const val CLIENT_ID = "Ov23li3RwvcGyHOV0Pan"
-    const val CLIENT_SECRET = "fc6b569cb13d8ae30371eb6b6c0c67ea504f6fd6"
+    const val CLIENT_ID = "Ov23lid9UeE58cpQjbh4"
+    const val CLIENT_SECRET = "aae655ff40dcd8a3e589d15398620014e0590f66"
 
 
     const val AUTHORIZE_URL = "https://github.com/login/oauth/authorize"
