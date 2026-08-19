@@ -126,11 +126,6 @@ Contributions are welcome! If you'd like to help improve DevRank:
 
 Feel free to open an [issue](https://github.com/Amit-Kundu-io/Dev-Rank/issues) for bugs, ideas, or feature requests.
 
----
-
-## 📄 License
-
-This project is open source. Add your preferred license (e.g. MIT) as a `LICENSE` file in the repo root, and it will automatically appear on the GitHub repository page.
 
 ---
 
