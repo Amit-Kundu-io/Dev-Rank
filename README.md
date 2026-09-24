@@ -55,23 +55,24 @@ Under the hood, it uses **MVI (Model-View-Intent)** for predictable, testable st
 | **GitHub REST API** | Profile & repository data |
 | **GitHub GraphQL API** | Contribution data |
 
----
 
-## 📱 Screenshots
+## 💻 Screenshots
 
 <div align="center">
 
 ### 🏠 Home
 
-<img src="https://raw.githubusercontent.com/Amit-Kundu-io/Images/main/WhatsApp%20Image%202026-03-22%20at%2011.20.33%20AM.jpeg" width="240" alt="DevRank home screen" />
+<img src="https://raw.githubusercontent.com/Amit-Kundu-io/Images/main/DevRank1.png" width="900" alt="DevRank Home Screen" />
 
-### 💻 Cross-Platform (Android + iOS)
+### 👤 Profile
 
-<img src="https://raw.githubusercontent.com/Amit-Kundu-io/Images/main/DevRank_Mac.jpg" width="750" alt="DevRank running on Android and iOS" />
+<img src="https://raw.githubusercontent.com/Amit-Kundu-io/Images/main/DevRank2.png" width="900" alt="DevRank Profile Screen" />
+
+### ⚖️ Compare
+
+<img src="https://raw.githubusercontent.com/Amit-Kundu-io/Images/main/DevRank3.png" width="900" alt="DevRank Compare Screen" />
 
 </div>
-
----
 
 ## 🚀 Getting Started
 
