@@ -112,7 +112,7 @@ class CompareViewModel(
                 )
             }
 
-              compareDevelopersUseCase(usernameA = "Amit-Kundu-io", usernameB = "DevMeghaG", token = token).onEach { result ->
+              compareDevelopersUseCase(usernameA = usernameA, usernameB = usernameB, token = token).onEach { result ->
 
                   when (result) {
 
