@@ -79,7 +79,6 @@ Under the hood, it uses **MVI (Model-View-Intent)** for predictable, testable st
 ### Prerequisites
 
 - Android Studio (latest stable)
-- JDK 17+
 - Kotlin
 - Compose Multiplatform plugin
 - Git
