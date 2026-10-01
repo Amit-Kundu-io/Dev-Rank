@@ -11,9 +11,6 @@ Built with Kotlin & Compose Multiplatform for Android and iOS.
 [![Ktor](https://img.shields.io/badge/Ktor-087CFA?style=for-the-badge&logo=ktor&logoColor=white)](https://ktor.io/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-[![Stars](https://img.shields.io/github/stars/Amit-Kundu-io/Dev-Rank?style=flat-square&color=yellow)](https://github.com/Amit-Kundu-io/Dev-Rank/stargazers)
-[![Forks](https://img.shields.io/github/forks/Amit-Kundu-io/Dev-Rank?style=flat-square&color=blue)](https://github.com/Amit-Kundu-io/Dev-Rank/network/members)
-[![Last Commit](https://img.shields.io/github/last-commit/Amit-Kundu-io/Dev-Rank?style=flat-square)](https://github.com/Amit-Kundu-io/Dev-Rank/commits/main)
 
 </div>
 
