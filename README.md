@@ -13,7 +13,6 @@ Built with Kotlin & Compose Multiplatform for Android and iOS.
 
 [![Stars](https://img.shields.io/github/stars/Amit-Kundu-io/Dev-Rank?style=flat-square&color=yellow)](https://github.com/Amit-Kundu-io/Dev-Rank/stargazers)
 [![Forks](https://img.shields.io/github/forks/Amit-Kundu-io/Dev-Rank?style=flat-square&color=blue)](https://github.com/Amit-Kundu-io/Dev-Rank/network/members)
-[![Issues](https://img.shields.io/github/issues/Amit-Kundu-io/Dev-Rank?style=flat-square&color=orange)](https://github.com/Amit-Kundu-io/Dev-Rank/issues)
 [![Last Commit](https://img.shields.io/github/last-commit/Amit-Kundu-io/Dev-Rank?style=flat-square)](https://github.com/Amit-Kundu-io/Dev-Rank/commits/main)
 
 </div>
